@@ -3,8 +3,7 @@
 int main()
 {
    int arr[1000],n , element;
-   printf("\n Name - Samyak Singh  ");
-   printf("\n Roll No. - 1900910100147  ");
+  
    printf("\n Enter the no. of Elements in array  ");
      scanf("%d",&n);
      
