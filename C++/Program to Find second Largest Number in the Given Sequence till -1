@@ -1,0 +1,27 @@
+#include<iostream.h>
+using namespace std;
+int main(int argc, char const *argv[])
+{
+    int num=0,prev_max=-1,max=0;
+
+    while(num!=-1){
+         cout<<"\n Enter Number\n";
+        cin>>num;
+        if(num>=max){
+            prev_max=max;
+            max=num;
+
+        }
+        else{
+            if (num>=prev_max && num<=max)
+            {
+
+                prev_max=num;
+            }
+        }
+
+    }
+    cout<<"\n Second highest Max is "<<prev_max;
+
+    return 0;
+}
