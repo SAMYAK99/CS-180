@@ -20,3 +20,4 @@ using System;
            Console.Write("Number is Prime.");       
      }  
    }  
+   
