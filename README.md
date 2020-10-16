@@ -1,8 +1,7 @@
 # CS-180
 An awesome repo contains all the important codes in different languages .
 
-# Tutorial 
-[here] (https://www.youtube.com/watch?v=8xjmCsdgUhE&t=19s)
+## Video Link [here](https://www.youtube.com/watch?v=8xjmCsdgUhE)
 
 # Guidelines
 Before pushing code please go through our guidelines
