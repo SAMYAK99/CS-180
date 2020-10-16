@@ -1,0 +1,31 @@
+using namespace std;
+#define ma 100001
+bool dp[ma];
+void seive()
+{
+    memset(dp,1,sizeof(dp));
+    dp[0]=0;
+    for(int i=4;i<ma;i+=2)dp[i]=0;
+    for(int i=3;i*i<ma;i++)
+    {
+        if(dp[i])
+        {
+            for(int j=i*i;j<ma;j+=i)
+            {
+                if(dp[j])dp[j]=0;
+            }
+        }
+    }
+}
+int main() {
+	int t;
+	cin>>t;
+	seive();
+	while(t--)
+	{
+	    int n;cin>>n;
+	    for(int i=2;i<=n;i++)if(dp[i])cout<<i<<" ";
+	    cout<<"\n";
+	}
+	return 0;
+}
