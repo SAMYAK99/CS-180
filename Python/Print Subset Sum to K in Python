@@ -1,0 +1,15 @@
+def printSubArrayK(input,output,k):
+    if len(input)==0:
+        if k==0:
+            print(*output)
+        return
+    printSubArrayK(input[1:],output,k)
+    smallOutput=output[:]
+    if input[0]<=k:
+        smallOutput.append(input[0])
+        printSubArrayK(input[1:],smallOutput,k-input[0])
+
+n=int(input())
+arr=[int(i) for i in input().split()]
+k=int(input())
+printSubArrayK(arr,[],k)
