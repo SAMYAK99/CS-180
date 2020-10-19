@@ -4,7 +4,7 @@ int main() {
    printf("Enter a year: ");
    scanf("%d", &year);
 
-   // leap year if perfectly visible by 400
+   // leap year if perfectly visible by 400 days
    if (year % 400 == 0) {
       printf("%d is a leap year.", year);
    }
