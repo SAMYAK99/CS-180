@@ -1,21 +1,21 @@
 #include<stdio.h>
 int main() {
-      double first, second, temp;
+      double first_no, second_no, temp;
       printf("Enter first number: ");
-      scanf("%lf", &first);
+      scanf("%lf", &first_no);
       printf("Enter second number: ");
-      scanf("%lf", &second);
+      scanf("%lf", &second_no);
 
       // Value of first is assigned to temp
-      temp = first;
+      temp = first_no;
 
       // Value of second is assigned to first
-      first = second;
+      first_no = second_no;
 
       // Value of temp (initial value of first) is assigned to second
-      second = temp;
+      second_no = temp;
 
-      printf("\nAfter swapping, firstNumber = %.2lf\n", first);
-      printf("After swapping, secondNumber = %.2lf", second);
+      printf("\nAfter swapping, firstNumber = %.2lf\n", first_no);
+      printf("After swapping, secondNumber = %.2lf", second_no);
       return 0;
 }
