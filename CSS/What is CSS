@@ -1,0 +1,39 @@
+Hello gyz Happy Coding...
+
+///////////////////////////// WELCOME TO THE CSS | HACKTOBERFEST 2020 /////////////////////////////
+
+CSS is a scripting Language,CSS stands for Cascading Style Sheets. It is used to describe the formatting and exterior design of a document which written in markup language (ex :HTML,XML). tTo change the style of web pages and user interfaces THIS css IS USED.
+Mainly CSS is used along with HTML and JavaScript for web applications and user interfaces.
+
+
+///////////////////////////// HOW WE USE CSS /////////////////////////////
+
+There are three ways to insert CSS in HTML documents.
+
+1.Inline CSS
+2.Internal CSS
+3.External CSS
+
+/////////// 1.Inline CSS
+
+This is used to apply CSS on a single line or element.
+
+<h1 style="color:pink">Hacktoberfest 2020</h1>
+
+/////////// 2.Internal CSS
+
+This is used to apply CSS on a single document or page. It is written inside the style tag within head section of html.
+
+<style>  
+h1{color:pink}  
+</style>  
+
+/////////// 3.External CSSS
+
+This is used to apply CSS on multiple pages or all pages. We arrange all the CSS code in a css file. It named with the extension .css .(ex:style.css) 
+
+h1{color:pink}
+
+Then we have to link style.css file to our html pages as follows,
+
+<link rel="stylesheet" type="text/css" href="style.css">  
