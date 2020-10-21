@@ -25,8 +25,6 @@ updater = Updater('<Bot_Token>', use_context=True)
 
 
 updater.dispatcher.add_handler(CommandHandler('hi', start))
-updater.dispatcher.add_handler(CommandHandler('gay', Gey))
-updater.dispatcher.add_handler(CommandHandler('id', id))
 updater.dispatcher.add_handler(CommandHandler('hello', hello))
 updater.dispatcher.add_handler(CommandHandler('about', me))
 
