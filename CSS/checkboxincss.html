@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<!-- Internal CSS -->
+<style>
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 25px;
+    }
+
+    /* Hide the default checkbox */
+    .container input {
+        visibility: hidden;
+        cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .mark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: lightgray;
+    }
+
+    .container:hover input~.mark {
+        background-color: gray;
+    }
+
+    .container input:checked~.mark {
+        background-color: rgb(255, 0, 179);
+    }
+
+    /* Create the mark/indicator (hidden when not checked) */
+    .mark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the mark when checked */
+    .container input:checked~.mark:after {
+        display: block;
+    }
+
+    /* Style the mark */
+    .container .mark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+</style>
+
+<body>
+
+    <h1>Select Grade</h1>
+    <label class="container">A
+        <input type="checkbox">
+        <span class="mark"></span>
+    </label>
+    <label class="container">B
+        <input type="checkbox">
+        <span class="mark"></span>
+    </label>
+    <label class="container">C
+        <input type="checkbox">
+        <span class="mark"></span>
+    </label>
+    <label class="container">D
+        <input type="checkbox" checked="check">
+        <span class="mark"></span>
+    </label>
+
+</body>
+
+</html>
