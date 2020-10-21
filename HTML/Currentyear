@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+
+<html> 
+
+  
+
+<body style="text-align:center;"> 
+
+    <h1> 
+
+        Hacktofest
+
+    </h1> 
+
+    <h2> 
+
+        How to get the current  
+
+        year?
+
+    </h2> 
+
+  
+
+    <button onclick="geeks()"> 
+
+        click me 
+
+    </button> 
+
+      
+
+    <h4 id="myID"></h4> 
+
+      
+
+    <script> 
+
+        function geeks() { 
+
+      
+
+            // Creating Date Object  
+
+            var dateobj = new Date(); 
+
+  
+
+            // Year from above object  
+
+            // is being fetched using getFullYear()  
+
+            var dateObject = dateobj.getFullYear(); 
+
+  
+
+            // Printing current year  
+
+            document.getElementById("myID").innerHTML 
+
+                = "The Current Year is : " + dateObject; 
+
+        } 
+
+    </script> 
+
+</body> 
+
+  
+
+</html>
