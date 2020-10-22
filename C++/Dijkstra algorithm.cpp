@@ -42,7 +42,7 @@ void dijkstra(int G[max][max],int n,int startnode) {
          distance[i]=mindistance+cost[nextnode][i];
          pred[i]=nextnode;
       }
-      count++;
+       count++;
    }
    for(i=0;i<n;i++)
    if(i!=startnode) {
