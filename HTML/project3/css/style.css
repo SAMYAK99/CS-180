@@ -1,0 +1,259 @@
+/* Reset content */
+*{
+    margin:0px;
+    padding:0px;
+}
+
+
+
+/* Navigation section */
+#navbar{
+    display:flex;
+    align-items:center;
+    position:sticky;
+    top:0px;
+}
+
+
+
+/* Navigation with logo */
+
+#logo{
+    margin: 15px 20px;
+}
+
+
+
+/* navigation with logo image */
+
+#logo img{
+    height:50px;
+    margin:4px 15px;
+
+}
+
+
+
+/* navigation with list */
+#navbar ul{
+    display:flex;
+    font-family: 'Baloo Bhai 2', cursive;
+    
+}
+
+/* Psuedo selector before */
+#navbar::before{
+    content:"";
+    background:black;
+    height:100%;
+    width:100%;
+    top:0px;
+    left:0px;
+    position:absolute;
+    z-index:-1;
+    opacity:0.4;
+}
+
+#navbar ul li{
+    list-style:none;
+    font-size:1.4rem;
+
+}
+
+#navbar ul li a{
+    display:block;
+    text-decoration:none;
+    padding:10px;
+    margin:15px;
+    border-radius:20px;
+    color:white;
+}
+#navbar ul li a:hover{
+    color:black;
+    background-color: white;
+}
+
+
+
+/* Home section */
+#home{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:578px;
+    padding:3px 200px;
+}
+
+#home::before{
+    content:"";
+    background:url("../food-1932466_1920.jpg") no-repeat center center/cover;
+    height:700px;
+    width:100%;
+    top:0px;
+    left:0px;
+    z-index:-1;
+    opacity:0.85;
+    position:absolute;
+}
+
+#home h1{
+    color:white;
+    text-align:center;
+    font-family: 'Bree Serif', serif;
+}
+
+#home p{
+    text-align:center;
+    color:white;
+    font-size:1.5rem;
+    font-family: 'Bree Serif', serif;
+}
+
+
+/* Utility class */
+.h-primary{
+    font-family: 'Bree Serif', serif;
+    font-size:3.8rem;
+    padding:12px;
+}
+
+.h-secondry{
+    font-family: 'Bree Serif', serif;
+    font-size:2.2rem;
+    padding:12px;
+}
+.btn{
+    padding:3px 20px;
+    background:brown;
+    color:white;
+    margin:17px;
+    border:2px solid white;
+    border-radius:16px;
+    font-size:1.5rem;
+    cursor:pointer;
+
+}
+
+.center{
+    text-align:center;
+}
+
+/* Services section */
+
+#services{
+    display:flex;
+    margin:20px;
+
+}
+
+#services .box{
+    border:2px solid brown;
+    margin:25px 25px;
+    border-radius:15px;
+    background:rgb(250, 248, 248);
+}
+
+#services .box img{
+    height:160px;
+    display:block;
+    margin:3px auto;
+}
+#services .box p{
+    font-family: 'Bree Serif', serif;
+}
+
+
+/* Clients section */
+#clients-section{
+    height:344px;
+    position:relative;
+}
+
+#clients-section::before{
+    content:"";
+    position:absolute;
+    background:url("../salad-2756467_1920.jpg") no-repeat center center/cover;
+    height:100%;
+    width:100%;
+    z-index:-1;
+    opacity:0.3;
+}
+
+#clients{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#clients img{
+    height:124px;
+}
+
+.clients-item{
+    padding:34px;
+}
+
+
+/* Contact us */
+
+#contact{
+   position:relative;
+}
+
+#contact::before{
+    content:"";
+    position:absolute;
+    background:url("../contact-us-4193523_1920.jpg") no-repeat center center/cover;
+    height:100%;
+    width:100%;
+    z-index:-1;
+    opacity:0.7;
+}
+
+footer{
+    background:black;
+    color:white;
+    padding:10px 20px;
+}
+
+#contact-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding-bottom:34px;
+}
+
+#contact-box input, 
+#contact-box textarea{
+    width:100%;
+    padding:0.5rem;
+    border-radius:9px;
+    font-size:1.1rem;
+}
+
+#contact-box form{
+    width:40%;
+
+}
+
+#contact-box label{
+    font-size:1.3rem;
+    font-family: 'Bree Serif', serif;
+}
+
+.btn-now{
+    /* border: 2px solid white; */
+    width: 100%;
+    border-radius: 10px;
+    height: 30px;
+    font-size: 25px;
+    margin: 3px auto;
+    cursor:pointer;
+    background:rgb(226, 215, 215);
+    color:black;
+}
+
+html{
+    scroll-behavior: smooth;
+}
