@@ -1,6 +1,7 @@
 #Python program to remove punctuations from a string
 
-#This program removes all punctuations from a string. We will check each character of the string using for loop. If the character is a punctuation, empty string is assigned to it.
+#This program removes all punctuations from a string. We will check each character of the string using for loop.
+#If the character is a punctuation, empty string is assigned to it.
 
 # define punctuation
 punctuations = r'''!()-[]{};:'"\,<>./?@#$%^&*_~'''
