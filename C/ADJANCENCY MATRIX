@@ -1,0 +1,28 @@
+#include <stdio.h>
+int main()
+{
+              int G[10][10],n,s,i,j,i_degree,o_degree;
+              printf("enter the number of nodes");
+              scanf("%d",&n);
+              printf("enter the adjancency matrix graph:");
+              for(i=0;i<n;i++)
+              for(j=0;j<n;j++)
+              {
+                           scanf("%d",&G[i][j]);
+              }
+              for(i=0;i<n;i++)
+              {
+                           i_degree=0;
+                           for(j=0;j<n;j++)
+                           if(G[j][i]!=0)
+                           i_degree++;
+              }
+              for(i=0;i<n;i++)
+              {
+              o_degree=0;
+              for(j=0;j<n;j++)
+              if(G[i][j]!=0)
+              o_degree++;
+}
+printf("%d %d %d",i,i_degree,o_degree);
+}
