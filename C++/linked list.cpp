@@ -26,8 +26,6 @@ int main()
     cout<<"\nAfter delettion of position 4 "<<endl;
     printList(head);
     return 0;
-
-
 }
 
 void insert(struct Node** head, int newData)
@@ -40,7 +38,7 @@ void insert(struct Node** head, int newData)
 
 void deleteNode(struct Node** head, int position)
 {
-    // if the list is empty
+    // if empty
     if(*head == NULL)
         return;
 
