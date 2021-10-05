@@ -1,14 +1,17 @@
-import UIKit
 
+//reads two arrays and prints the merge between them.
+//to avoid duplicating identical elements, uncomment lines 22-23
+
+import UIKit
 
 var arrayOne:[Int] = [1, 2, 4, 5, 6]
 var arrayTwo:[Int] = [2, 3, 5, 7]
 
-let m:Int = arrayOne.count //5
-let n:Int = arrayTwo.count //4
-var i = 0 // 1, 2, 3, 4, 5
-var j = 0 // 1, 2, 3
-// 1, 2, 2, 3, 4, 5, 5, 6,
+let m:Int = arrayOne.count
+let n:Int = arrayTwo.count
+var i = 0
+var j = 0
+
 
 func printUnion(_ arrayOne:[Int], _ arrayTwo:[Int], _ m:Int, _ n:Int) {
 
