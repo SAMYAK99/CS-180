@@ -15,10 +15,19 @@ func printUnion(_ arrayOne:[Int], _ arrayTwo:[Int], _ m:Int, _ n:Int) {
     while ( i < m && j < n) {
         if (arrayOne[i] <= arrayTwo[j]) {
             print(arrayOne[i])
+            
+// uncomment the three lines below to avoid printing identical elements
+//                if (arrayOne[i] == arrayTwo[j]) {
+//                    j += 1
+//                }
+            
             i += 1
         }
         else {
             print(arrayTwo[j])
+            if (arrayOne[i] == arrayTwo[j]) {
+                j += 1
+            }
             j += 1
         }
     }
@@ -37,3 +46,5 @@ func printUnion(_ arrayOne:[Int], _ arrayTwo:[Int], _ m:Int, _ n:Int) {
 }
 
 printUnion(arrayOne, arrayTwo, m, n)
+
+
