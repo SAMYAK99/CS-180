@@ -1,3 +1,5 @@
+//Bubble Sort algorithm for Swift
+//Enter any array in the line 5
 
 import UIKit
 
