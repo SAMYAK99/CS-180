@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid Design</title>
+<style>
+    * 
+    {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-align: center;
+        font-family: Verdana;
+    }
+
+    main
+    {
+        width: 75%;
+        margin: 50px auto;
+        border: 1px solid grey;
+        display: grid;
+        color: white;
+        grid-template-rows: 60px 100px 200px 60px;
+        grid-template-columns: repeat(3, 1fr) 150px;
+        grid-gap: 20px;
+
+    }
+
+    .div1 
+    {
+        background-color:crimson;
+        grid-column: 1/-1;
+    }
+
+    .div2 
+    {
+        background-color:hotpink;
+    }
+
+    .div3 
+    {
+        background-color: #ffa502;
+    }
+
+    .div4 
+    {
+        background-color: #5352ed;
+    }
+
+    .div5 
+    {
+        background-color: #2f3542;
+        grid-row: 2/4;
+        grid-column: 4/5;
+    }
+
+    .div6 
+    {
+        background-color: darkgreen;
+        grid-column: 1/ 4;
+    }
+
+    .div7 
+    {
+        background-color: #00d2d3;
+        grid-column: 1/-1;
+    }
+</style>
+</head>
+
+<body>
+    <main>
+        <div class="div1"> <br>Header </div>
+        <div class="div2"> <br><br>Box1 </div>
+        <div class="div3"> <br><br>Box2 </div>
+        <div class="div4"> <br><br>Box3 </div>
+        <div class="div5"> <br><br><br><br><br><br><br>Side-Bar </div>
+        <div class="div6"> <br><br><br><br><br>This is a Simple CSS-Grid Web Development Project
+        </div>
+        <div class="div7"><br>Footer</div>
+    </main>
+</body>
+</html>
