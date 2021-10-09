@@ -1,3 +1,7 @@
+<p align="center" >
+  <img src="./Posters/CS-180.1.jpg" width="800" height="600"> 
+</p>
+
 # CS-180
 An Awesome beginner-friendly repo to help you in open-source contributions. Made specifically for contributions in HACKTOBERFEST 2021! .Push any code in any language you want . Please leave a star ⭐ to support this project! ✨
 
