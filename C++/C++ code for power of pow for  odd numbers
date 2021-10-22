@@ -1,0 +1,28 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long n;
+        cin >> n;
+        long long sum = 0;
+        long d = 2 * n - 1;
+
+
+        for (int i = 1; i <= d; i = i + 2)
+        {
+            long long power = i * i;
+            sum += power;
+
+        }
+        cout << sum << endl;
+
+    }
+    //code
+    return 0;
+}

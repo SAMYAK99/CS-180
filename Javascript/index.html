@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form Validation</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+	#error-msg{
+		display: block;
+		width: 40%;
+		background-color: #FFCCCB;
+	}
+</style>
+</head>
+<body>
+	<div class="container"><br>
+		<h1 class="text-success text-center">Complete Form Validation In Javascript</h1>
+		<center><span id="error-msg"></span></center>
+		<div class="col-lg-8 m-auto d-block"><br>
+			<form action="#" onsubmit="return validation()" class="bg-light" style="padding:10px; border-radius: 15px">
+				<div class="form-group">
+					<label>Username:</label>
+					<input type="text" name="user" class="form-control" id="user" autocomplete="off">
+				</div>
+
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" name="pass" class="form-control" id="pass" autocomplete="off">
+				</div>
+
+				<div class="form-group">
+					<label>Confirm Password:</label>
+					<input type="password" name="conpass" class="form-control" id="conpass" autocomplete="off">
+				</div>
+
+                <div class="form-group">
+					<label>Mobile Number:</label>
+					<input type="text" name="mobile" class="form-control" id="mobilenumber" autocomplete="off">
+				</div>	
+
+				<div class="form-group">
+					<label>Email:</label>
+					<input type="email" name="email" class="form-control" id="emails" autocomplete="off">
+				</div>		
+
+				<input type="submit" name="submit" value="submit" class="btn btn-success">	
+			</form>
+		</div>
+	</div>
+	<script>
+		function validation(){
+			var user = document.getElementById('user').value;
+			var pass = document.getElementById('pass').value;
+			var conpass = document.getElementById('conpass').value;
+			var mobilenumber = document.getElementById('mobilenumber').value;
+			var emails = document.getElementById('emails').value;
+
+			//**Username Validation Start**//
+			if(user==""){
+				document.getElementById('error-msg').innerHTML="Please Fill the Username Field";
+				return false;
+			}if((user.length<=2)||(user.length>20)){
+				document.getElementById('error-msg').innerHTML="username length must be between 2 and 20";
+				return false;
+			}if(!isNaN(user)){
+                document.getElementById('error-msg').innerText="Numbers are not allowed";
+				return false;
+			 }
+			//**Username Validation End**//
+			
+			//**Password Validation Start**//
+			if(pass==""){
+				document.getElementById('error-msg').innerHTML="Please Fill the password Field"
+				return false;
+			}if((pass.length<8)){
+				document.getElementById('error-msg').innerHTML="Password length must be greater than 8";
+				return false;
+			}
+			//**Password Validation End**//
+			
+			//**Confirmation Password Validation Start**//
+			if(conpass==""){
+				document.getElementById('error-msg').innerHTML="Please Fill the confirmpassword Field"
+				return false;
+			}if(conpass!==pass){
+               document.getElementById('error-msg').innerHTML="Passwords are not matching";
+               return false;
+			}
+			//**Confirmation Password Validation End**//
+			
+			//**Mobile Number Validation Starts**//
+			if(mobilenumber==""){
+				document.getElementById('error-msg').innerHTML="Please Fill the mobile number Field"
+				return false;
+			}if(isNaN(mobilenumber)){
+				document.getElementById('error-msg').innerHTML="Please Fill the  numbers only";
+				return false;
+			}if(mobilenumber.length<10){
+				document.getElementById('error-msg').innerHTML="Please enter 10 digit number";
+				return false;
+			}
+			//**Mobile Number Validation End**//
+			
+			//**Email Validation Start**//
+			if(emails==""){
+				document.getElementById('error-msg').innerHTML="Please Fill the email Field";
+				return false;
+			}if(emails.indexOf('@')<=0){
+				document.getElementById('error-msg').innerHTML="Invalid @ position";
+				return false;  //samir@gmail.com
+			}if((emails.charAt(emails.length-4)!='.') && (emails.charAt(emails.length-3)!='.')){
+				document.getElementById('error-msg').innerHTML="Invalid . position";
+				return false;   //samir@gmail.com
+			}if((emails.charAt(emails.length-9)!='g') && (emails.charAt(emails.length-8)!='g')){
+				document.getElementById('error-msg').innerHTML="Invalid email id";
+				return false; 
+			//**Email Validation End**//
+		}
+	}
+	</script>
+</body>
+</html>

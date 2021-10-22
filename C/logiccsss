@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+void And(int arr1[],int arr2[])
+{
+int i,ans;
+    for(i=0;i<4;i++)
+    {
+        if(arr1[i]==1&&arr2[i]==1)
+        {
+            ans=1;
+        }
+        else
+        {
+            ans=0;
+        }
+        printf("\n%d AND %d=%d\n",arr1[i],arr2[i],ans);
+    }
+}
+int Or(int arr1[],int arr2[])
+{
+    int i,result;
+    for(i=0;i<4;i++)
+    {
+        if(arr1[i]==0&&arr2[i]==0)
+        {
+             result=0;
+        }
+        else
+        {
+            result=1;
+        }
+        printf("\n%d OR %d=%d\n",arr1[i],arr2[i],result);
+    }
+}
+int Not(int arr1[])
+{
+    int i,answer;
+    for(i=0;i<2;i++)
+    {
+        if(arr1[i]==0)
+        {
+             answer=1;
+        }
+        else
+        {
+             answer=0;
+        }
+        printf("\nNOT %d = %d\n",arr1[i],answer);
+    }
+
+}
+int Xor(int arr1[],int arr2[])
+{
+    int i,res;
+    for(i=0;i<4;i++)
+    {
+        if(arr1[i]==arr2[i])
+        {
+            res=0;
+        }
+        else
+        {
+            res=1;
+        }
+        printf("\n%d XOR %d=%d\n",arr1[i],arr2[i],res);
+    }
+}
+int main()
+{
+    int i,n,ch=0,ans,res,result,answer;
+    int arr1[]={0,1,0,1};
+    int arr2[]={0,0,1,1};
+    while(1)
+    {
+        printf("\n***MENU***");
+        printf("\n1.AND\n2.OR\n3.NOT\n4.XOR\n5.EXIT");
+        printf("\nEnter your choice: ");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: And(arr1,arr2);
+                    break;
+            case 2: Or(arr1,arr2);
+                    break;
+            case 3: Not(arr1);
+                    break;
+            case 4: Xor(arr1,arr2);
+                    break;
+            case 5: exit(0);
+                                         default:printf("Wrong selection!!!...Try Again!!!\n");
+        }
+    }
+}
