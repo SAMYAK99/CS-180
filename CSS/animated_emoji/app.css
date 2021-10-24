@@ -1,0 +1,47 @@
+.welcome {
+    text-align: center;
+    margin-top: 3%;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 60px;
+}
+
+.emoji {
+    font-size: 80px;
+}
+
+.emoji::after {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.wave::after {
+    content: '✋';
+    --emoji: '👋';
+    animation-name: twoFrames;
+    animation-duration: 1.2s;
+}
+
+@keyframes twoFrames {
+    50% {
+        content: var(--emoji);
+    }
+}
+
+a {
+    color: #2A2A2A !important;
+    text-decoration: none;
+}
+
+footer.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #D5E3EF !important;
+    border-top: 2px solid rgb(190, 190, 190);
+    /*grosor, estilo y color borde superior*/
+}
+
+.font-footer {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+}
