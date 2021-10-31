@@ -24,6 +24,7 @@ void bubbleSort(int *array, int size) {
          break;       // No swap in this pass, so array is sorted
    }
 }
+
 int main() {
    int n;
    cout << "Enter the number of elements: ";
