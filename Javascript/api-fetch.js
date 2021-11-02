@@ -14,4 +14,4 @@ console.log("about to fetch a rainbow");
       const response= await fetch("#api-url");
       const blob= await response.blob();
       document.getElementById("API").src=URL.createObjectURL(blob);
-    }
+
