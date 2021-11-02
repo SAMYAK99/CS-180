@@ -64,6 +64,7 @@ class Graph {
       subsets[v].parent = v;
       subsets[v].rank = 0;
     }
+    
     i = 0;
     while (e < vertices - 1) {
       Edge next_edge = new Edge();
@@ -75,8 +76,10 @@ class Graph {
         Union(subsets, x, y);
       }
     }
-    for (i = 0; i < e; ++i)
+    
+    for (i = 0; i < e; ++i){
       System.out.println(result[i].src + " - " + result[i].dest + ": " + result[i].weight);
+    }
   }
 
   public static void main(String[] args) {
