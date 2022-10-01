@@ -177,3 +177,23 @@ class TicTacToeBoard(tk.Tk):
         for button, coordinates in self._cells.items():
             if coordinates in self._game.winner_combo:
                 button.config(highlightbackground="red")
+    
+    def reset_board(self):
+        """Reset the game's board to play again."""
+        self._game.reset_game()
+        self._update_display(msg="Ready?")
+        for button in self._cells.keys():
+            button.config(highlightbackground="lightblue")
+            button.config(text="")
+            button.config(fg="black")
+
+
+def main():
+    """Create the game's board and run its main loop."""
+    game = TicTacToeGame()
+    board = TicTacToeBoard(game)
+    board.mainloop()
+
+
+if __name__ == "__main__":
+    main()
