@@ -52,3 +52,11 @@ class TicTacToeGame:
         second_diagonal = [col[j] for j, col in enumerate(reversed(columns))]
         return rows + columns + [first_diagonal, second_diagonal]
     
+    def is_valid_move(self, move):
+        """Return True if move is valid, and False otherwise."""
+        row, col = move.row, move.col
+        move_was_not_played = self._current_moves[row][col].label == ""
+        no_winner = not self._has_winner
+        return no_winner and move_was_not_played
+
+    
