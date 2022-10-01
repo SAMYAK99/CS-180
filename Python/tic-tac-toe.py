@@ -59,4 +59,14 @@ class TicTacToeGame:
         no_winner = not self._has_winner
         return no_winner and move_was_not_played
 
-    
+    def process_move(self, move):
+        """Process the current move and check if it's a win."""
+        row, col = move.row, move.col
+        self._current_moves[row][col] = move
+        for combo in self._winning_combos:
+            results = set(self._current_moves[n][m].label for n, m in combo)
+            is_win = (len(results) == 1) and ("" not in results)
+            if is_win:
+                self._has_winner = True
+                self.winner_combo = combo
+                break
