@@ -1,5 +1,5 @@
 <p align="center" >
-  <img src="./Posters/CS-180.1.jpg" width="800" height="600"> 
+  <img src="./Posters/hacktoberfest 2022.png" width="1000" height="750"> 
 </p>
 
 # CS-180
