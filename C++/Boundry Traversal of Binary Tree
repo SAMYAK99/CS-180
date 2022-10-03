@@ -1,0 +1,124 @@
+/*
+Author Name: Ambika Mishra
+Date:- 2nd October
+
+*/
+
+class Solution
+{
+
+    ArrayList<Integer> ar;
+
+    public void left(Node node) {
+
+        if(node==null) {
+
+            return ;
+
+        }
+
+        if(node.left==null && node.right==null) {
+
+            return;
+
+        }
+
+        if(node.left!=null) {
+
+            ar.add(node.data);
+
+            left(node.left);
+
+        }
+
+        else if(node.right!=null) {
+
+            ar.add(node.data);
+
+            left(node.right);
+
+        }
+
+    }
+
+    public void leaf(Node root) {
+
+        if(root==null) return;
+
+        if(root.left==null && root.right==null ) {
+
+            ar.add(root.data);
+
+        }
+
+        leaf(root.left);
+
+        leaf(root.right);
+
+    }
+
+    public void right(Node node) {
+
+        if(node==null) {
+
+            return ;
+
+        }
+
+        if(node.left==null && node.right==null) {
+
+            return;
+
+        }
+
+        if(node.right!=null) {
+
+            right(node.right);
+
+            ar.add(node.data);
+
+        }
+
+        else if(node.left!=null) {
+
+            right(node.left);
+
+             ar.add(node.data);
+
+        }
+
+        
+
+        
+
+    }
+
+ArrayList <Integer> boundary(Node node)
+
+{
+
+    ar=new ArrayList<>();
+
+    if(node.left==null && node.right==null) {
+
+        ar.add(node.data);
+
+        return ar;
+
+    }
+
+    ar.add(node.data);
+
+    left(node.left);
+
+    leaf(node);
+
+    right(node.right);
+
+    return ar;
+
+    
+
+}
+
+}

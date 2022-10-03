@@ -1,0 +1,82 @@
+1) https://leetcode.com/problems/longest-substring-without-repeating-characters/
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int>mp(256,-1);
+        int l,r;
+        l = r = 0;
+        int n = s.size();
+        int maks = 0;
+        while(r<n){
+            if(mp[s[r]] != -1)
+                l = max(l, mp[s[r]]+1);
+            mp[s[r]] = r;
+            maks = max(maks, r-l+1);
+            r++;
+        }
+        return maks;
+        
+    }
+};
+
+
+2) https://leetcode.com/problems/substring-with-concatenation-of-all-words/
+
+class Solution {
+public:
+    
+    bool checkSubstring(unordered_map<string, int> wordCount, string s, int wordLen) {
+        for(int j=0; j<s.size(); j+=wordLen) {
+            string w = s.substr(j, wordLen);
+            if(wordCount.find(w) != wordCount.end()) {
+                if(--wordCount[w] == -1) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    vector<int> findSubstring(string s, vector<string>& words) {
+        vector<int> res;
+        int wordLen = words[0].size();
+        int sLen = s.size();
+        int wordsWindow = words.size() * wordLen;
+        
+        unordered_map<string, int> wordCount;
+        for(int i=0; i<words.size(); i++) {
+            wordCount[words[i]]++;
+        }
+        
+        int i = 0;
+        while(i + wordsWindow <= sLen) {
+            if(checkSubstring(wordCount, s.substr(i, wordsWindow), wordLen)) {
+                res.push_back(i);
+            }
+            i++;
+        }
+        return res;
+    }
+};
+
+3) https://leetcode.com/problems/repeated-dna-sequences/
+
+class Solution {
+public:
+    vector<string> findRepeatedDnaSequences(string s) {
+     unordered_map<string,int>mp;
+      vector<string>ans;
+        for(int i=0;i<=s.size();i++)
+        {  
+            string subS=s.substr(i,10);
+            if(mp[subS]!=-1)
+              mp[subS]++;
+            if(mp[subS]>1)
+            {ans.push_back(subS);mp[subS]=-1;}
+        }
+        return ans;
+    }
+};
