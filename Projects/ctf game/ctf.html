@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex h-screen rounded-lg align-center justify-center  bg-gray-400 mb-1/2">
+        <div class="box border-4 w-[400px] h-[200px] text-center flex flex-col space-y-4 p-5">
+            <h1 class="font-bold text-">ENHANCE!</h1>
+            <a href="drawing.flag.svg"class="text-red-500" download >download svg</a><br>
+            <span>Happy Hacking!!</span>
+            <form class="bg-red-500 rounded-lg">
+                <button for="fname" onclick="check()">Submit Flag</button>
+                <input type="text" id="fname" name="fname" class="border-5 border-black"></input>
+            </form>
+            <div>
+            <audio id="audio" src="https://www.pacdv.com/sounds/interface_sound_effects/sound2.mp3" autoplay="false" ></audio>
+            <a onclick="playSound();" class="cursor-pointer"> Play</a>
+            <audio id="audio" src="https://www.pacdv.com/sounds/interface_sound_effects/sound5.mp3" autoplay="false" ></audio>
+            <a onclick="playSound();" class="cursor-pointer"> Play</a>
+            <audio id="audio" src="https://www.pacdv.com/sounds/interface_sound_effects/sound7.mp3" autoplay="false" ></audio>
+            <a onclick="playSound();" class="cursor-pointer"> Play</a>
+            </div>
+        </div>
+        
+    </div>
+    <script type="text/javascript" src="invisible.js">
+    </script>
+</body>
+</html>
