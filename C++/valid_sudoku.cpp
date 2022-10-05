@@ -1,13 +1,15 @@
-// problem statement : Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+/* 
+Problem statement : Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
 
-// Each row must contain the digits 1-9 without repetition.
-// Each column must contain the digits 1-9 without repetition.
-// Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+Time complexity : O(n^2)
+Space complexity : O(n^2), but since n = 9, so it is constant 
+*/
 
 #include <bits/stdc++.h>
 using namespace std;
-
-// time complexity : O(n^2), space complexity : O(n^2), but since n = 9, so it is constant 
 
 bool isValidSudoku(vector<vector<char>> &board)
 {
