@@ -17,5 +17,6 @@ Before pushing code please go through our guidelines:
 2. Mention proper name for the code before making PR
 3. Repetetive Pull Request with same code in the same language wont be counted
 4. If you want to push the code in some other language  which is not present in this repo , make a seprate folder with language name and then push it . 
+5. Explain Your code with proper comments along with problem statement (especially for DSA) . Its better if you can write time and space complexity
 
 # Happy Hacktoberfest 😀
