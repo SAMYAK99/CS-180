@@ -1,6 +1,8 @@
-Class BinarySearch {
-	
-	int binarySearch(int arr[], int l, int r, int x){
+import java.util.Scanner;
+public class BinarySearch 
+{	
+	int binarySearch(int arr[], int l, int r, int x)
+	{//Function for Binary Searching
 		if (r >= l){
 			int mid = l + (r - l) / 2;
 			if (arr[mid] == x){
@@ -13,16 +15,20 @@ Class BinarySearch {
 		}
 		return -1;
 	}
-	public static void main(String args[]){
-		BinarySearch ob = new BinarySearch();
+	
+	public static void main(String args[])
+	{//Main method for calling the binarySearch function
+		Scanner sc=new Scanner(System.in);
+		BinarySearch ob = new BinarySearch();//Creating an object
 		int arr[] = { 2, 3, 4, 10, 40 };
 		int n = arr.length;
-		int x = 10;
+		int x = sc.nextInt();
 		int result = ob.binarySearch(arr, 0, n - 1, x);
 		if (result == -1){
 			System.out.println("Element not present");
         }
-		else{
+		else
+		{
 			System.out.println("Element found at index " + result);
         }
 	}
