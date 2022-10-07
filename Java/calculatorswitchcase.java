@@ -24,7 +24,10 @@ public class calculatorswitchcase {
             case "/":result=a/b;
             System.out.println(result);
                     break;
-            default:System.out.println("Invalid output");
+            case "%":result=a%b;
+            System.out.println(result);
+                    break;
+            default:System.out.println("Invalid input");
 
         }
 
