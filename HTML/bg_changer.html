@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-size: cover;
+        }
+        
+        img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .bg-text {
+            background-color: rgb(0, 0, 0, 0.4);
+            /* Fallback color */
+            color: white;
+            font-weight: bold;
+            font-size: 80px;
+            border: 10px solid #f1f1f1;
+            position: fixed;
+            margin: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        @keyframes imgFade {
+            0% {
+                opacity: 1;
+            }
+            17% {
+                opacity: 1;
+            }
+            40% {
+                opacity: 0;
+            }
+            92% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        img {
+            animation-name: imgFade;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-duration: 8s;
+        }
+        
+        img:nth-of-type(1) {
+            animation-delay: 6s;
+        }
+        
+        img:nth-of-type(2) {
+            animation-delay: 4s;
+        }
+        
+        img:nth-of-type(3) {
+            animation-delay: 2s;
+        }
+        
+        img:nth-of-type(4) {
+            animation-delay: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="bg-text">MY TEXT</div>
+    <img src="https://media.istockphoto.com/photos/the-more-you-know-the-more-your-business-grows-picture-id1292991881?b=1&k=20&m=1292991881&s=170667a&w=0&h=5QfHORbgcqTFyHbRp7L83YlVF-U5Mt-AsWXX2zBtOZ8=">
+    <img src="https://media.istockphoto.com/photos/code-picture-id182465097?b=1&k=20&m=182465097&s=170667a&w=0&h=37SuJyRUoBh1CqYelU4l5nG0F3pEabEcmEW5b4Fi2Lg=">
+    <img src="https://media.istockphoto.com/photos/code-programming-for-website-editors-view-picture-id1290492381?b=1&k=20&m=1290492381&s=170667a&w=0&h=NQSXJKhncCP1GLzDkD8KPZsCOh1wldDj5RZbPVJztxQ=">
+    <img src="https://media.istockphoto.com/photos/communication-network-concept-in-cyberspace-abstract-background-picture-id1283633813?b=1&k=20&m=1283633813&s=170667a&w=0&h=GmmR6AkrzW3cfJvr2mrpvVsgQe8AlUkagDbG9Klt7dQ=">
+
+
+
+</body>
+
+</html>
