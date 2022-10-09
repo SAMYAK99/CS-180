@@ -1,0 +1,69 @@
+/* CSS Helper file can be utilize by directly adding link to the file it helps the user with 
+    preset basic setting 
+      Padding, margin to 0
+      box-sizing set to border-box
+      font-family set for consistent font across browser
+      html and body tag height set to 100% to cover all space
+      smooth scrolling for page to provide better UX
+      Use of CSS Variable is encouraged for consistency and ease of developing 
+    Visual help for best practice with HTML
+      Checks for lang attribute
+      Checks of block element within inline element
+      Checks for images without alt tag
+      Check for remote Anchor Tag access
+*/
+/* Setting Basic Default / RESET CSS
+So it will override default styling across browsers. */
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Arial Narrow", Arial, sans-serif;
+}
+
+/* CSS Variable */
+:root {
+  --variable-name: value;
+  --Alert: #ff0000;
+}
+
+/* 100% height of html and body element */
+html,
+body {
+  height: 100%;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* lang attribute is important for accessibility & accessible technologies */
+html[lang=""]::before,
+html:not([lang])::before {
+  content: "You didn't declared a lang attribute for html";
+  display: block;
+  color: #8a2be2;
+}
+
+/* Malicious Issues for Anchor. Security Issues */
+a[target="_blank"]:not([rel="noopener noreferrer"]):not([rel="noreferrer noopener"]) {
+  outline: var(--Alert) 2px dotted;
+}
+
+/* no div inside inline element */
+/* :is is not widely supported across different browser */
+:is(a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, output, q, samp, script, select, small, span, strong, sub, sup, textarea, time, tt, var)
+  > div {
+  background-color: #dc143c8a;
+  outline: 2px dashed #a00;
+}
+
+/* alt attribute for Image. It may remain empty for decorative image */
+img[alt=""],
+img:not([alt]) {
+  border: 2px dashed #2b2ee2;
+  outline: 2px solid var(--Alert);
+}
