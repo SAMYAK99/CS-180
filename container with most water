@@ -1,0 +1,25 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int maxArea(vector<int> &height)
+{
+    int n=height.size();
+    int area=0,res=0;
+    int s=0,e=n-1;
+    while(s<=e){
+        if(height[s]>height[e]){
+            res=height[e]*(e-s);
+            e--;
+        }
+        else{
+            res=height[s]*(e-s);
+            s++;
+        }
+        if(area<=res)area=res;
+    }
+    return area;
+    }
+
+int main()
+{
+return 0;
