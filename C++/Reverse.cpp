@@ -1,22 +1,20 @@
+m to Reverse an Integer
 #include <iostream>
-#include <cmath>
-
 using namespace std;
 
-int main(){
+int main() {
+    int n, reversedNumber = 0, remainder;
 
-    int num,rem,rev = 0;
+    cout << "Enter an integer: ";
+    cin >> n;
 
-    cout<<"enter a number \n";
-    cin>>num;
-
-    while(num!=0){
-        rem = num%10;
-        rev = rev*10+rem;
-        num = num/10;
-
+    while(n != 0) {
+        remainder = n%10;
+        reversedNumber = reversedNumber*10 + remainder;
+        n /= 10;
     }
-    cout<<"after reverse "<<rev;
 
-	return 0;
+    cout << "Reversed Number = " << reversedNumber;
+
+    return 0;
 }
