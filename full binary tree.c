@@ -32,7 +32,7 @@ bool isFullBinaryTree(struct Node * root)
         return false;
 }
 
-int main() 
+int main()   
 {
         struct Node * root = NULL;
         root = createNewNode(1);
@@ -45,6 +45,7 @@ int main()
         root -> left -> right -> right = createNewNode(7);
 
         if (isFullBinaryTree(root))
+                
                 printf("The tree is full binary tree\n");
         else
                 printf("The tree is not full binary tree\n");
