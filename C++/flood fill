@@ -1,0 +1,30 @@
+bool isvalid(int i,int j,int m,int n,vector<vector<int>>&image,int color,int newcolor)
+    {
+        if(i>=0 && i<m && j>=0 && j<n && image[i][j]==color)
+        {
+            return true;
+        }
+        return false;
+    }
+    void dfsrec(int i,int j,int m,int n,vector<vector<int>>&image,int color,int newcolor)
+    {
+        image[i][j] = newcolor;
+        if(isvalid(i+1,j,m,n,image,color,newcolor))
+            dfsrec(i+1,j,m,n,image,color,newcolor);
+        if(isvalid(i-1,j,m,n,image,color,newcolor))
+            dfsrec(i-1,j,m,n,image,color,newcolor);
+        if(isvalid(i,j+1,m,n,image,color,newcolor))
+            dfsrec(i,j+1,m,n,image,color,newcolor);
+        if(isvalid(i,j-1,m,n,image,color,newcolor))
+            dfsrec(i,j-1,m,n,image,color,newcolor);
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newcolor) 
+    {
+        int m=image.size();
+        int n=image[0].size();
+        int color=image[sr][sc];
+        if(color==newcolor)
+            return image;
+        dfsrec(sr,sc,m,n,image,color,newcolor);
+        return image;
+    }
