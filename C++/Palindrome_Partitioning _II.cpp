@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#define ll long long
 using namespace std;
 
     vector<vector<bool>> LPS;
