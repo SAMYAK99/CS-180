@@ -1,0 +1,89 @@
+bool isValid(int i, int j, int m, int n, vector<vector<int>>& grid)
+    {
+        if(i>=0 && i<m && j>=0 && j<n && grid[i][j] == 1)
+            return true;
+        
+        return false;
+    }
+    
+    void bfs(int m, int n, vector<vector<int>>& grid, int &time, queue<pair<int, int>>& q)
+    {
+        while(!q.empty())
+        {
+           int temp = 0;
+           int q_size = q.size();
+        
+          while(q_size != 0)
+          {
+            int i = q.front().first;
+            int j = q.front().second;
+            q.pop();
+            
+            
+            if(isValid(i, j+1, m, n, grid))
+            {
+                temp++;
+                grid[i][j+1] = 2;
+                q.push({i, j+1});
+            }
+            if(isValid(i, j-1, m, n, grid))
+            {
+                temp++;
+                grid[i][j-1] = 2;
+                q.push({i, j-1});
+            }
+            if(isValid(i-1, j, m, n, grid))
+            {
+                temp++;
+                grid[i-1][j] = 2;
+                q.push({i-1, j});
+            }
+            if(isValid(i+1, j, m, n, grid))
+            {
+                temp++;
+                grid[i+1][j] = 2;
+                q.push({i+1, j});
+            }
+           q_size--;  
+          }
+         if(temp != 0) time++;
+
+        }
+    }
+    
+    int orangesRotting(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int time = 0;
+        queue<pair<int, int>> q;
+        int fressOrange = 0;
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j =0; j<n; j++)
+            {
+                if(grid[i][j] == 2)
+                    q.push({i, j});
+                else if(grid[i][j] == 1)
+                    fressOrange++;
+            }
+        }
+        if(fressOrange == 0)
+            return 0;
+        
+        if(q.size() == 0)
+            return -1;
+        
+        
+        bfs(m, n, grid, time, q);
+        
+        for(int i=0; i<m; i++)
+        {
+            for(int j =0; j<n; j++)
+            {
+                if(grid[i][j] == 1)
+                    return -1;
+            }
+        }
+        
+      return time;
