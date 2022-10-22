@@ -1,0 +1,46 @@
+public class smallest_subarray_of_sum {
+    public static void subarray(int[]arr,int n,int x){
+        int curr_sum=0,min_len=n+1;
+        int start=0,end=0;
+        while (end<n){ 
+            while (curr_sum<=x && end<n) {
+                curr_sum += arr[end++];
+            }
+            while (curr_sum > x && start < n){
+                if (end-start<min_len){
+                    min_len=end-start;
+                }
+                curr_sum-=arr[start++];
+            }
+        }
+        System.out.println(min_len);
+    }
+
+    public static void smallestSubarray(int[]a,int n,int sum){
+        int smallest=Integer.MAX_VALUE;
+        for (int i=0;i<n;i++){
+            smallest=Math.min(a[i],smallest);
+        }
+
+        int curr_sum=a[0]+Math.abs(smallest);
+        int start=0;
+        int targetSum=sum;
+
+        for (int i=1;i<=n;i++){
+            while (curr_sum-(i-start)*Math.abs(smallest)>targetSum && start<i-1 ){
+                curr_sum=curr_sum-a[start]-Math.abs(smallest);
+                start++;
+            }
+
+            if (curr_sum-(i-start)*Math.abs(smallest)==targetSum){
+                System.out.println("Sum found between indexes " +
+                        start + " and " + (i - 1));
+                return;
+            }
+
+            if (i<n){
+                curr_sum=curr_sum+a[i]+Math.abs(smallest);
+            }
+        }
+        System.out.println("No subarray found");
+    }
