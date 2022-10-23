@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/majority-element/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        //we will set 1st ele as mojority one count is 1 as it has with us 1 time
+        int count = 1;
+        int maxFreqEle = nums[0];
+        //now we will iterate over the array
+        //if count is 0 make the curr ele as majoriy and
+        //incrment the count  as we have the ele with us 1 time
+        for (int i = 1; i < nums.size(); i++) {
+            if (count == 0) {
+                count++;
+                maxFreqEle = nums[i];
+                //if the element in arr is equal incrment the count
+                //if not decremenet the cout
+            } else if (nums[i] == maxFreqEle) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return maxFreqEle;
+    }
+};
