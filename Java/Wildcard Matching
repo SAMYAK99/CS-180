@@ -1,0 +1,31 @@
+class Solution {
+    public boolean isMatch(String s, String p) {
+           int sLen = s.length();
+        int pLen = p.length();
+        boolean[][] dp = new boolean[pLen + 1][sLen + 1]; //+1 because the of case of s = "" and p = "". setting row[0] and col[0] to represent ""
+        dp[0][0] = true; // "" matches with ""
+        
+        // first row should be false, but no need to reinitialize, because java array initializes itself with false
+        
+        for (int y = 1; y <= pLen; y++) { // initializes first column
+            if (p.charAt(y - 1) == '*') { // charAt needs to -1, because we make index 0 as "" for the dp 2-d array
+                dp[y][0] = dp[y - 1][0]; // same as line 19, but since x == 0 there is no [x-1]
+            } // else no need to set, already false
+            // no need to check matching as line 22, because nothing matches with empty string "" except for *.
+        }
+        for (int y = 1; y <= pLen; y++) {
+            for (int x = 1; x <= sLen; x++) {
+                if (p.charAt(y - 1) == '*') { 
+                    dp[y][x] = dp[y - 1][x] || dp[y][x - 1];
+                    // if p curr char is *, go from direct top (* is empty) or from direct left (* is any char)
+                }
+                if (p.charAt(y - 1) == s.charAt(x - 1) || p.charAt(y - 1) == '?') {
+                    // if p curr char is ?, it matches with any char
+                    dp[y][x] = dp[y - 1][x - 1]; 
+                    // we add one char for both p and s, so compare the result for i-1 and j-1. 
+                }
+            }
+        }
+        return dp[pLen][sLen];
+    }
+}
