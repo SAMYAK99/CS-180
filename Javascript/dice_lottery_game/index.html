@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Dice Lottery Game">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Razi Azam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Lottery Game by Razi</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <img src="./images/dicelogo.png" alt="dice logo">
+            <h1>Dice Lottery Game<span>Created by Razi Azam for Hacktoberfest 2022</span></h1>
+            <div class="prizes-board">
+                <img src="./images/notebook.png" alt="notebook">
+                <span>1</span>
+                <img src="./images/mug.png" alt="mug">
+                <span>2</span>
+                <img src="./images/coffee.png" alt="coffee">
+                <span>3</span>
+                <img src="./images/tshirt.png" alt="tshirt">
+                <span>4</span>
+                <img src="./images/pen.png" alt="pen">
+                <span>5</span>
+            </div>
+        </header>
+        <div class="game-board">
+            <main class="main">
+                <div class="dice">
+                    <img src="./images/dice1.png" id="dice" alt="dice">
+                </div>
+                <div class="input-area">
+                    <input type="number" id="inputNum" min="1" max="5" placeholder="1" required />
+                    <button onclick="diceLottery()">Roll Dice</button>
+                </div>
+            </main>
+            <aside class="aside">
+                <div class="score-board">
+                    <h3 id="result">Result</h3>
+                </div>
+                <div class="award">
+                    <img src="./images/trophy.png" id="award" alt="">
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    min-width: 800px;
+    height: 100vh;
+    background-color: rgb(55, 76, 90);
+    margin: auto;
+}
+
+.wrapper > .header {
+    display: flex;
+    align-items:center;
+    justify-content: baseline;
+    width: 100%;
+    height: 170px;
+    border: 2px solid rgb(93, 130, 155);
+}
+
+.wrapper > .header > img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.wrapper > .header > h1 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgba(161, 209, 241, 0.781);
+    text-shadow: 0px 5px 5px rgb(34, 42, 61);
+}
+
+.wrapper > .header > h1 > span {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(161, 209, 241, 0.781);
+    font-size: 15px;
+    text-shadow: none;
+    position: absolute;
+    margin: 50px 0 0 -275px;
+}
+
+.wrapper > header > .prizes-board {
+    width: 60%;
+    height: auto;
+    background-color: rgb(17, 24, 29);
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+}
+
+.wrapper > header > .prizes-board > img  {
+    width: 140px;
+    height: auto;
+}
+
+.wrapper > header > .prizes-board > span  {
+    width: 50px;
+    height: 40px;
+    color: rgb(17, 24, 29);
+    background-color: rgb(106, 164, 202);
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-left: -70px;
+    border-radius: 25px;
+}
+
+
+.wrapper > .game-board {
+    width: 100%;
+    height: calc(100% - 170px);
+    display: flex;
+}
+
+.wrapper  .main{
+    width: 65%;
+    height: 100%;
+    background-color: rgb(17, 24, 29);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .main > .dice img {
+    width: 300px;
+    height: 300px;
+}
+
+.wrapper .main > .input-area {
+    width: 250px;
+    border: 2px solid rgb(106, 164, 202);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.wrapper .main > .input-area > input {
+    width: 50px;
+    height: 40px;
+    color: rgb(17, 24, 29);
+    background-color: rgb(106, 164, 202);
+    border-radius: 8px;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.wrapper .main > .input-area > button {
+    width: 180px;
+    height: 45px;
+    color: rgb(17, 24, 29);
+    background-color: rgb(106, 164, 202);
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    border: 2px inset rgb(17, 24, 29) ;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.wrapper .aside {
+    width: 35%;
+    height: 100%;
+    background-color: rgba(9, 22, 31, 0.651);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .aside > .score-board {
+    border: 2px ridge rgb(127, 208, 255);;
+    width: 350px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .aside > .score-board > h3 {
+    font-size: 40px;
+    font-weight: 500;
+    color: rgb(127, 208, 255);
+}
+
+.wrapper .aside > .award {
+    border: 2px ridge rgb(127, 208, 255);;
+    width: 350px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper .aside > .award > img {
+    width: 300px;
+    height: 300px;
+}
