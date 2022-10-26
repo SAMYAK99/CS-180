@@ -1,0 +1,10 @@
+.dashboardDiv {
+    width: 95%;
+    height: 98%;
+    margin-top: 20px;
+}
+
+.dashboardHeader {
+    display: flex;
+    justify-content: center;
+}
