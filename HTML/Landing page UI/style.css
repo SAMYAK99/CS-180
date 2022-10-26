@@ -1,0 +1,406 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family:;
+}
+body{
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+header{
+    width: 100%;
+    display: inline-block;
+}
+header img{
+    width: 100px;
+    position: relative;
+    top: -15px;
+    filter: drop-shadow(0px 1px 5px #29292954);
+}
+.logo{
+      float: left;
+      left: 5%;
+position: relative;
+}
+.carti
+
+
+.menu{
+    text-align: center;
+}
+.menuact{
+    display: none;
+}
+.menu ul{
+    list-style: none;
+    position: relative;
+    left: 5%;
+   font-size: 20px;
+}
+.menu ul li{
+    float: left;
+    width: 70px;
+    height: 50px;
+    display: block;
+    margin-top: 20px;
+    margin-left: 35px;
+}
+
+.menu ul li a{
+   color: #000;
+    width: 100px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+}
+.menu ul li a:hover{
+    color: rgb(99, 133, 245);
+     
+}
+.search{
+       position: relative;
+       left: 20%;
+}
+.search input{
+    margin-top: 17px;
+    float: left;
+    
+    height: 30px;
+    border-radius: 5px;
+    width: 15%;
+    border: 1px solid black;
+}
+
+.cart{
+        background-color: black;
+        border-radius: 185px;
+        float: right;
+        right: 6%;
+        position: relative;
+        margin-top: 12px;
+}
+.cart:hover{
+    background-color: rgb(99, 133, 245);
+}
+.carti{
+    width: 40px;
+    left: 0px;
+   top: 0px;
+   float: left;
+}
+.iphoneh{
+    float: left;
+    border-top: 1px solid rgba(102, 102, 102, 0.295);
+    width: 100%;
+    margin-top: -40px;
+    box-shadow: 1px 1px  rgba(102, 102, 102, 0.295);
+}
+.iphoneh h2{
+    left: 5%;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: -10px;
+}
+.iphoneh h3{
+    float: right;
+    color: rgb(66, 62, 62);
+    top: -13px;
+    position: relative;
+}
+.information{
+    float: left;
+    margin-top: 20px;
+    margin-left: 65px;
+    width: 50%;
+    position: relative;
+    
+}
+.information h1{
+    margin-top: 120px;
+}
+.information h3{
+    color: rgb(66, 62, 62);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.select{
+    border: 2px solid #c36cbb;
+	background: transparent;
+	color: #c36cbb;
+	cursor: pointer;
+	font-size: 16px;
+    top: 14px;
+    position: relative;
+    text-align: initial;
+    height: 55px;
+    margin-top: 100px;
+}
+.select p{
+    font-size: 14px;
+}
+.addcart{
+    background: #c36cbb;
+	width: 150px;
+	height: 50px;
+	cursor: pointer;
+	font-size: 16px;
+	border: none;
+	color: white;
+	margin: 30px 0px 0px 30px;
+}
+.select:active{
+    background: #c36cbb;
+    color: white;
+}
+.addcart:active{
+    background: transparent;
+	color: #c36cbb;
+    border: 2px solid #c36cbb;
+}
+/*
+/*photo csss */
+.photo{
+    float: right;
+    width: 40%;
+    display: flex;
+	justify-content: center;
+}
+.photo img{
+    height: 100%;
+    width: 60%;
+	filter: drop-shadow(0px 5px 3px black);
+	animation: drop 1.5s ease;
+}
+/*landing image effect*/
+@keyframes drop {
+	0% {
+		opacity: 0;
+		transform: translateY(-80px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+.copy{
+    margin: -20px;
+    background-color: black;
+   text-align: center;
+    top: 900px;
+    position: relative;
+    
+}
+.copy a{
+    text-decoration: none;
+    color: white;
+}
+@media only screen and (min-width: 985px) and (max-width: 1165px){
+    .search {
+       left: 6%;
+    }
+    .photo {
+        width: 45%;
+    }
+    .information {
+        width: 48%;
+    }
+    .information h3 {
+      margin-bottom: -70px;
+    }
+    .select{
+        height: 100px;
+        width: 30%;
+    }
+    .addcart{
+        height: 100px;
+        width: 30%;
+        top: -14px;
+        position: relative;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  
+    .menu ul li:last-child{
+        display: none;
+    }
+    .cart{
+        right: 2%;
+    }
+    .logo {
+        left: 2%;
+    }
+    .search{
+        left: 8%;
+    }
+    .iphoneh h2 {
+        left: 2.5%;
+    }
+    .iphoneh h3{
+        font-size: 14px;
+    }
+    .information{
+        margin-left: 17px;
+        margin-top: 0%;
+    }
+    .select{
+        font-size: 11px;
+        width: 42%;
+    }
+    .information h3 {
+         margin-bottom: -70px;
+    }
+    .photo img {
+       width: 80%;
+    }
+    .addcart {
+       width: 85%;
+        left: -29px;
+        position: relative;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .logo {
+        left: 0%;    
+     }
+     .search{
+         display: none;
+     }
+}
+@media only screen and (min-width: 280px) and (max-width: 767px) {
+    .logo {
+       left: 0%;    
+    }
+    header {
+        position: fixed;
+        background-color: white;
+        z-index: 8;
+        height: 58px;
+        margin-top: 0px;
+    }
+    .search{
+        display: none;
+    }
+    .menu ul{
+        left: 0%;
+    }
+    .menu ul li{
+        width: 40px;
+        margin-left: 20px;
+    }
+    .iphoneh {
+        top: 115px;
+        position: relative;
+    }
+    .iphoneh h2 {
+        left: 0;
+        font-size: 16px;
+    }
+    .iphoneh h3 {
+        font-size: 10px;
+        top: -5px;
+    }
+    .photo {
+        width: 98%;
+        margin-top: 100px;
+    }
+    .information {
+       margin-left: 22px;
+        width: 98%;
+    }
+    .select{
+        font-size: 12px;
+        width: 40%;
+        height: 55px;
+        text-align: center;
+        left: 5%;
+    }
+    .addcart {
+        width: 80.5%;
+        left: 0%;
+        position: relative;
+    }
+    .information h1{
+        margin-top: 0;
+
+    }
+    .information h3 {
+        margin-bottom: -70px;
+    }
+    .copy{
+        position: relative;
+        width: 100%;
+        display: inline-block;      
+        top: 200px; 
+    }
+}
+@media only screen and (min-width: 300px) and (max-width: 550px){
+    .logo {
+        left: 40%;    
+     }
+     header{
+        height: 35px;
+        position: fixed;
+     }
+     header img {
+        width: 60px;
+     }
+     .carti {
+        width: 28px;
+     }
+     .cart {
+        margin-top: -24px;
+    }
+     .menuact{
+         display: inline;
+         left: -15%;
+        position: relative;
+     }
+    .menu ul li{
+            display: none;
+        }
+/* for hover manu 
+        .menuact:hover{
+            color: blue
+            ;
+        }
+     .menuact:active + .menu ul li {
+        position: relative;
+        display: block;
+     }
+ */
+     .iphoneh {
+        top: 75px;
+        height: 39px;
+    }
+     .iphoneh h2 {
+        left: 4%;
+        font-size: 14px;
+        margin-top: -2px;
+    }
+    .iphoneh h3{
+        font-size: 10px;
+        top: 10px;
+        float: left;
+        left: 4%;
+    }
+    .photo {
+        margin-top: 80px;
+    }
+    .information {
+        margin-left: 12%;
+       font-size: 12px;
+    }
+    .information h3 {
+        width: 75%;
+    }
+    .select {
+        font-size: 10px;
+        width: 49%;
+        left: -10%;
+    }
+    .addcart {
+        width: 98.5%;
+        left: -20%;
+    }
+}

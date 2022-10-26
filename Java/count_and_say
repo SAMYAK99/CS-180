@@ -1,0 +1,24 @@
+public class count_and_say {
+    public String countAndSay(int n) {
+        String result="1";
+        for(int i=1;i<n;i++){
+            result=say(result);
+        }
+        return result;
+    }
+
+    static String say(String num){
+        StringBuilder sb = new StringBuilder();
+        int start=0;
+        int end=1;
+        while(end<num.length()){
+            if(num.charAt(start)!=num.charAt(end)){
+                sb.append((end-start)).append(num.charAt(start));
+                start=end;
+            }
+            end++;
+        }
+        sb.append((end-start)).append(num.charAt(start));
+        return  sb.toString();
+    }
+}

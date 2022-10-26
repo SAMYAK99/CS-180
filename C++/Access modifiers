@@ -1,0 +1,26 @@
+// ACCESS MODIFIERS
+
+#include<iostream>
+using namespace std;
+
+class Hero {
+    
+    // properties
+    public:
+        int health;
+        char level;
+};
+
+int main(){
+    
+    // Creation of object
+    Hero Ramesh;
+
+    // Setting value;
+    Ramesh.health = 70;
+    Ramesh.level = 'A';
+
+    cout << "health is:" << Ramesh.health << endl;
+    cout << "level is:" << Ramesh.level << endl;
+    return 0;
+}

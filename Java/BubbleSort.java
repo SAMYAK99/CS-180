@@ -1,3 +1,10 @@
+
+next →← prev
+Bubble Sort in Java
+We can create a java program to sort array elements using bubble sort. Bubble sort algorithm is known as the simplest sorting algorithm.
+
+In bubble sort algorithm, array is traversed from first element to last element. Here, current element is compared with the next element. If current element is greater than the next element, it is swapped.
+
 public class BubbleSortExample {  
     static void bubbleSort(int[] arr) {  
         int n = arr.length;  
@@ -32,4 +39,4 @@ public class BubbleSortExample {
                 }  
    
         }  
-}  
+} 

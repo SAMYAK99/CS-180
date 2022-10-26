@@ -1,0 +1,65 @@
+// GETTER/SETTER
+
+#include<iostream>
+using namespace std;
+
+class Hero {
+    
+    // properties
+    private:
+    int health;
+
+    public:
+    char level;
+
+    void print(){
+        cout << level << endl;
+    }
+
+    int getHealth() {
+        return health;
+    }
+
+    char getLevel() {
+        return level;
+    }
+
+    void setHealth(int h) {
+        health = h;
+    }
+
+    void setLevel(char ch) {
+        level = ch;
+    }
+
+};
+
+int main(){
+
+    // Creation of object
+    Hero Ramesh;
+    // IMP
+    cout<< "Size of Ramesh is " << sizeof(Ramesh) <<endl;
+
+    // Setting value;
+    cout<<"Ramesh health is " << Ramesh.getHealth() <<endl;
+
+    // using setter
+    Ramesh.setHealth(70);
+    // Ramesh.health = 70;
+    Ramesh.level = 'A';
+
+    cout << "health is:" << Ramesh.getHealth() << endl;
+    cout << "level is:" << Ramesh.level << endl;
+
+    return 0;
+}
+
+/*
+
+HOMEWORK -->
+
+1 --> Padding in oops
+2 --> Greedy alingment
+
+*/
