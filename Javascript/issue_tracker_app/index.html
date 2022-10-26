@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Hacktoberfest 2022 Contribution">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Razi Azam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Tracker App</title>
+    <link rel="stylesheet" href="css/style.css" type = "text/css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Issue Tracker App</h1>
+            <span>Made With Vanilla Js, HTML, and CSS</span>
+        </div>
+        <div class="bodySection">
+            <div class="inputSection">
+                <div class="inputSubSec1">
+                    <br/>
+                    <input type="text" name="issueText" id="issueText" placeholder="Enter an Issue"> 
+                    <button type="submit" class = "inptButton" onclick="handlers.addIssue()">Add a New Issue</button>
+                    <br/>
+                    <input type="number" name="issuePosition" id="changeIssuePositionInput" placeholder="Enter Position">
+                    <input type="text" name="ChangedIssue" id="changeIssuetextInput" placeholder="Enter a new Issue">
+                    <button type="submit" class = "inptButton" onclick="handlers.changeIssue()">Change an Issue</button>
+                    <br/>
+                    <input type="text" name="issueText" id="toggleIssuePositionInput" placeholder="Enter position"> 
+                    <button type="submit" class = "inptButton" onclick="handlers.toggleComplete()">Toggle</button>
+                </div>
+                <div class="inputSubSec2">
+                    <p class="instruction">Instruction</p>
+                    <p class ="instruction">1. Enter an issue in the first text field.</p>
+                    <p class ="instruction">2. Click the button next to it to add an issue.</p>
+                    <p class ="instruction">3. Click on the [X] button to delete an issue.</p>
+                    <p class ="instruction">4. Enter the position starting from 0 and a new issue to update the issue.</p>
+                    <p class ="instruction">5. Enter the position (starts with 0) to toggle the issue.</p>
+                </div>
+            </div>
+            <div class="outputSection">
+                <div class="issuesWindow">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="footNote">
+                &copy; Razi Azam | Hacktoberfest 2022 Contribution
+            </p>
+        </div>
+    </div> <!-- End of Wrapper Div -->
+
+    <!-- Js -->
+    <script src="js/script.js" type = "text/javascript"></script>
+</body>
+</html>
