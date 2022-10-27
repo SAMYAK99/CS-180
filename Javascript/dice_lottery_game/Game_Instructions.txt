@@ -1,0 +1,10 @@
+Instructions to play the game:
+1. Choose any number from 1 to 5 from the number box.
+2. Click the button named 'Rool Dice' to roll the dice.
+3. If your chosen number matches with the dice, you will win.
+4. Acoording to the number, the gift item will be shown below the result.
+5. Else if your chosen number doesn't match, you will lose the game.
+6. Repeat the same steps to play again and win the prizes.
+
+Thank You for playing this simple lottery game.
+Designed and developed by Razi Azam.
