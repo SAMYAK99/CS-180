@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>😇Gargi's Personal Site</title>
+    <link rel="stylesheet" href="/portfolio/css/style.css">
+  </head>
+  <body>
+    <table cellspacing="20">
+      <tr>
+        <td>
+          <img src="IMG20220303122853.jpg" alt="Gargi's profile picture" height="120" width="120" >
+
+        </td>
+        <td>
+          <h1>GARGI DHAWAN</h1>
+        
+
+        <h2> Hello! Gargi Dhawan here.</h2> 
+        </td>
+      </tr>
+      <hr>
+    </table>
+ <br>
+ <br>
+I'm currently pursuing my BTech from <a href="https://nith.ac.in/">NIT,Hamirpur</a> in the <a href="https://en.wikipedia.org/wiki/Electronic_engineering"> electronics and communication</a>  branch. I'm also a member of <a href="https://www.istenith.com/"> ISTE, Nith. </a>
+A society that promotes technical education.
+ <br>
+ I am trying to grow and develop new skills as much as I can. So, let's walk together with love and peace and spread positivity.
+<hr>
+  <h4>Education Qualification</h4><ul>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>YEARS</th>
+        <TH>INSTITUTE</TH>
+      </tr>
+    </thead>
+    <tbody>
+<TR><TD>2018-2020</TD>
+<TD> <a href="http://davlkbshimla.org/"> D.A.V. Lakaar Bazaar Shimla, Himachal Pradesh</a></TD></TR>
+<TR><TD>2021-Presently</TD>
+<td> <a href="https://nith.ac.in/"> National Institute of Technology Hamirpur</a> </td></TR>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+   
+  </table>
+  </ul>
+  <h4>Skills</h4>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Web_development">Web Development</a></li>
+<li><a href="https://www.adobe.com/express/create/poster">Poster Design</a></li>
+    <!-- <li><a href="https://www.interaction-design.org/literature/topics/graphic-design#:~:text=Graphic%20design%20is%20a%20craft,to%20optimize%20the%20user%20experience.">Graphic Design</a></li> -->
+  </ul>
+  <h4>Tools and Technologies</h4>
+  <ul>
+    <li><a href="https://www.adobe.com/in/products/illustrator.html">Adobe Illustrator</a></li>
+    <li><a href="https://git-scm.com/">Git</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/HTML5">HTML5</a></li>
+  </ul>
+  <h4>
+    <a href="/portfolio/html/Gargidhawan.here/CONTACT ME .HTML">Contact me</a> </h4>
+ <hr>
+ 
+  </body>
+</html>
