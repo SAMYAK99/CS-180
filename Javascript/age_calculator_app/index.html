@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Hacktoberfest 2022 Contribution">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Razi Azam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator APP</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header><h1>Age Calculator App</h1></header>
+        <main>
+            <div class="calc-container">
+                <label for="birthDate">Select Your Birth Date:</label>
+                <input type="date" name="birthDate" min ="" max="" id="dob" required />
+                <label for="userAge">Your Age is (in years):</label>
+                <input type="text" name="userAge" id="userAge" readonly />
+                <button id="btnAge" onclick="calcAge()">Calculate Age</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

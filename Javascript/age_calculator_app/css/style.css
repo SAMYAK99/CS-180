@@ -1,0 +1,96 @@
+:root {
+    --primary-text-color: #adcfcc;
+    --primary-bg-color: #0f1414;
+    --secondary-text-color: #7afff4;
+    --secondary-bg-color: #0f423e;
+}
+
+body {
+    background-color: var(--primary-text-color);
+}
+
+.wrapper {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--primary-bg-color);
+    border: 2px solid var(--secondary-text-color);
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 5px var(--primary-bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper > header > h1 {
+    text-align: center;
+    color: var(--primary-text-color);
+}
+
+.wrapper > main {
+    color: var(--secondary-text-color);
+    width: 60%;
+    height: 80%;
+}
+
+.wrapper > main > .calc-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper > main > .calc-container > label {
+    margin: 16px 0 16px 0;
+    font-size: 25px;
+}
+
+.wrapper > main > .calc-container > input {
+    margin-bottom: 16px;
+    font-size: 30px;
+    width: 220px;
+    height: 50px;
+    padding: 5px;
+    background-color: var(--primary-text-color);
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 5px;
+}
+
+.wrapper > main > .calc-container > input[name="userAge"] {
+    margin-bottom: 16px;
+    font-size: 60px;
+    width: 100px;
+    height: 100px;
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-text-color);
+    border: 1px solid var(--secondary-text-color);
+    text-align: center;
+    border-radius: 5px;
+    cursor: not-allowed;
+}
+
+.wrapper > main > .calc-container > button {
+    margin-top: 10px;
+    font-size: 25px;
+    width: 200px;
+    height: 50px;
+    color: var(--primary-bg-color);
+    background-color: var(--primary-text-color);
+    border: 1px ridge var(--secondary-text-color);
+    box-shadow: 2px 2px 5px 5px var(--primary-bg-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.wrapper > main > .calc-container > button:hover {
+    color: var(--secondary-text-color);
+    background-color: var(--secondary-bg-color);
+    border: 1px ridge var(--secondary-text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
