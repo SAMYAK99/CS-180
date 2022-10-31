@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Hacktoberfest 2022 Contribution">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Razi Azam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupees To Dollar Conversion APP</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header><h1>Rupees To Dollar Conversion APP</h1></header>
+        <main>
+            <div class="calc-container">
+                <label for="dollar">Enter amount in dollar [&#36;]:</label>
+                <input type="number" min="1" step="any" value="1" name="dollar" id="dollar" required />
+                <label for="rupees">Amount in Rupees [&#8377;]:</label>
+                <input type="text" name="rupees" id="rupees" readonly />
+                <button id="btnConvert" onclick="convertDollarToRupee()">Convert</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
