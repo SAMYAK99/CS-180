@@ -1,0 +1,742 @@
+<html>  
+<head>
+    <title>장기</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width = device-width, initial-scale = 1" />
+    <style>
+        :root {
+            --cell-width: 80px;
+            --cell-height: calc(var(--cell-width) * 0.9)
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+            box-sizing: border-box;
+        }
+
+        .center {
+            position: absolute;
+            top: 40%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+
+        .board {
+            position:relative;
+            background: #723820;
+            width: calc(8 * var(--cell-width));
+            height: calc(9 * var(--cell-height));
+            display: flex;
+            box-sizing: content-box;
+            flex-flow: column wrap;
+            padding: calc(var(--cell-width) / 2);
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            width: var(--cell-width);
+            height: var(--cell-height);
+            border: 1px solid black;
+        }
+
+        .unit {
+            position: absolute;
+            text-align: center;
+            overflow: hidden;
+            transition: 1.5s ease-in-out;
+        }
+
+        .unit > .inner {
+            transform: rotate(45deg);
+            background: white;
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .unit > .inner {
+            background: white;
+        }
+        
+        .unit > .inner > .text {
+            margin: auto;
+            font-family: '궁서';
+            font-weight: 760;
+            transform: rotate(-45deg);
+        }
+
+        .slash {
+            background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="100%" x2="100%" y2="0" stroke="black" stroke-width="2"/></svg>');
+        }
+
+        .backslash {
+            background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="black" stroke-width="2"/></svg>');
+        }
+
+        .path {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 40%;
+        }
+
+        .info {
+            font-size: 3rem;
+            z-index: 100;
+            text-align: center;
+            width: 50%;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .red {
+            color: blue;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        button.start {
+            width: 100%;
+            height: 100%;
+            font-size: 3rem;
+            background: white;
+        }
+
+        .switch {
+            position: absolute;
+            background: #723820;
+            border-radius: 5px;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="center">
+    <div class="board"></div>
+</div>
+
+<script>
+// 유틸
+
+Array.prototype.takeWhile = function(f) {
+    const res = [];
+
+    for (const v of this) {
+        const pred = f(v);
+
+        if (pred) res.push(v);
+        else return res;
+
+        if (pred === 'stop') return res;
+    }
+
+    return res
+}
+
+Array.prototype.skipWhile = function(f) {
+    const res = [...this];
+
+    for (const v of this) {
+        const pred = f(v);
+
+        if (pred) res.shift();
+        else return res;
+
+        if (pred === 'skipAll') return []
+
+        if (pred === 'stop') return res;
+    }
+
+    return res;
+}
+
+const range = function (n, m) {
+    if (arguments.length === 1)
+        return Array.from({ length: n }).map((_, i) => i);
+
+    if (arguments.length === 2) {
+        if (n === m) return [n]
+        else if (n < m) {
+            return Array.from({ length: m - n + 1 }).map((_, i) => i + n);
+        } else {
+            return Array.from({ length: n - m + 1 }).map((_, i) => m - i + (n - m));
+        }
+    }
+}
+
+const zip = (arr1, arr2) => {
+    const length = Math.min(arr1.length, arr2.length)
+    return Array.from({ length }).map((_, i) => [arr1[i], arr2[i]])
+}
+
+
+const isSame = ([x1, y1]) => ([x2, y2]) => x1 === x2 && y1 === y2;
+
+const isIn = (positions) => ([x, y]) =>
+    positions.find(([_x, _y]) => x === _x && y === _y)
+
+const min = Math.min
+const max = Math.max
+
+</script>
+
+<script>
+const board = document.querySelector('.board')
+
+const haveCrossline = (x, y) => {
+    const index = y * 8 + x;
+
+    return [3, 12, 59, 68].includes(index) ? 'backslash' :
+    [4, 11, 60, 67].includes(index) ? 'slash' : ''
+}
+
+board.innerHTML =  range(9).map(
+    y => 
+      `<div class="row">
+        ${range(8).map(x => `<div class="cell ${haveCrossline(x, y)}"></div>`).join('')}
+       </div>`    
+    ).join('')
+
+
+const isInBoard = ([x, y]) => 0 <= x && x < 9 && 0 <= y && y < 10;
+
+const cellWidth = getComputedStyle(document.documentElement).getPropertyValue("--cell-width").match(/\d+/)[0] * 1;
+const cellHeight = cellWidth * 0.9
+
+
+const sizer = (text) => {
+    switch (text) {
+        case '楚':
+        case '漢':
+            return cellWidth;
+            
+        case '車':
+        case '馬':
+        case '象':
+        case '車':
+        case '包':
+            return cellWidth * 0.8;
+        case '兵':
+        case '卒': 
+        case '士':
+        case 'path':
+            return cellWidth * 0.6;
+        default: return cellWidth;
+    }
+}
+
+const table = range(10).map(() => range(9).map(() => 0))
+const redCatch = []
+const greenCatch = []
+
+const gameStatus = {
+    selectedUnit: null,
+    started: false,
+}
+
+class Unit {
+    constructor(text, x, y) {
+        this.text = text
+        this.x = x
+        this.y = y
+        this.size = sizer(text)
+        this.team = y > 4 ? 'green' : 'red'
+
+        this.node = document.createElement('div')
+        this.node.style= `
+            width: ${this.size}px;
+            height: ${this.size}px;
+            left: ${this.left}px;
+            top: ${this.top}px;
+            font-size: ${this.size / 30}rem;
+            color: ${this.team};
+        `
+
+        this.node.classList.add('unit', text)
+        this.node.innerHTML = `<span class="inner"><span class="text">${text}</span></span>`
+        this.node.addEventListener('click', (e) => this.onClick(e))
+
+        board.appendChild(this.node)
+
+        table[this.y][this.x] = this
+    }
+
+    get left() { return this.x * cellWidth + (cellWidth - this.size) / 2 }
+
+    get top() { return this.y * cellHeight + (cellHeight - this.size) / 2 }
+
+    get pos() { return [this.x, this.y] }
+
+    posIs([x, y]) {
+        return this.x === x && this.y === y
+    }
+
+    calcPath () {
+        const canForward = ([x, y]) => !table[y][x] || (table[y][x].team !== this.team && 'stop');
+        const isEmptyPlace = ([x, y]) => !table[y][x];
+        const isEnemy = ([x, y]) => table[y][x] && table[y][x].team !== this.team;
+        const isEmptyOrEnemy = path => isEmptyPlace(path) || isEnemy(path);
+        const toAbsoultePos = ([x, y]) => [this.x + x, this.y + y];
+
+        if (this.text === '兵') {
+            const paths = [
+                [[-1, 0], [1, 0], [0, 1]].map(toAbsoultePos).filter(isInBoard).filter(canForward),
+                isIn([[3, 7], [5, 7]])(this.pos) ? [[4, 8]].filter(canForward) : [],
+                this.posIs([4, 8]) ? [[3, 9], [5, 9]].filter(canForward) : [],
+            ].flat()
+
+            return paths
+        }
+
+         if (this.text === '卒') {
+            const paths = [
+                [[-1, 0], [1, 0], [0, -1]].map(toAbsoultePos).filter(isInBoard).filter(canForward),
+                isIn([[3, 2], [5, 2]])(this.pos) ? [[4, 1]].filter(canForward) : [],
+                this.posIs([4, 1]) ? [[3, 0], [5, 0]].filter(canForward) : [],
+            ].flat()
+
+            return paths
+        }
+
+        else if (this.text === '漢' || this.text === '楚' || this.text === '士') {
+            const isInPalace = this.team === 'red' ? 
+                ([x, y]) => 3 <= x && x <= 5 && 0 <= y && y <= 2 :
+                ([x, y]) => 3 <= x && x <= 5 && 7 <= y && y <= 9;
+            
+            const isPalaceSideMiddle = this.team === 'red' ?
+                ([x, y]) => (y === 1 && (x === 3 || x === 5)) || (x === 4 && (y === 0 || y === 2)) :
+                ([x, y]) => (y === 8 && (x === 3 || x === 5)) || (x === 4 && (y === 7 || y === 9)) 
+
+            const paths = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
+                .map(toAbsoultePos)
+                .filter(isInPalace)
+                .filter(([x, y]) => !isPalaceSideMiddle(this.pos) || !isPalaceSideMiddle([x, y]))
+                .filter(canForward)
+
+            return paths
+        }
+
+        else if (this.text === '車') {
+            const paths = [
+                range(this.x - 1, 0).map(x => [x, this.y]).filter(isInBoard).takeWhile(canForward),
+                range(this.x + 1, 8).map(x => [x, this.y]).filter(isInBoard).takeWhile(canForward),
+                range(this.y - 1, 0).map(y => [this.x, y]).filter(isInBoard).takeWhile(canForward),
+                range(this.y + 1, 9).map(y => [this.x, y]).filter(isInBoard).takeWhile(canForward),
+                this.posIs([3, 7]) ? [[4, 8], [5, 9]].takeWhile(canForward) : [],
+                this.posIs([3, 9]) ? [[4, 8], [5, 7]].takeWhile(canForward) : [],
+                this.posIs([5, 7]) ? [[4, 8], [3, 9]].takeWhile(canForward) : [],
+                this.posIs([5, 9]) ? [[4, 8], [3, 7]].takeWhile(canForward) : [],
+                this.posIs([4, 8]) ? [[3, 7], [3, 9], [5, 7], [5, 9]].filter(canForward) : [],
+                this.posIs([3, 0]) ? [[4, 1], [5, 2]].takeWhile(canForward) : [],
+                this.posIs([3, 2]) ? [[4, 1], [5, 0]].takeWhile(canForward) : [],
+                this.posIs([5, 0]) ? [[4, 1], [3, 2]].takeWhile(canForward) : [],
+                this.posIs([5, 2]) ? [[4, 1], [3, 0]].takeWhile(canForward) : [],
+                this.posIs([4, 1]) ? [[3, 0], [3, 2], [5, 0], [5, 2]].filter(canForward) : [],
+            ].flat()
+
+            return paths
+        }
+
+        else if (this.text === "包") {
+            const calcPoPath = pathList => pathList
+                .filter(isInBoard)
+                .skipWhile(([x, y]) => !table[y][x] || (table[y][x] && table[y][x].text === '包'  && 'skipAll'))
+                .slice(1)
+                .takeWhile(([x, y]) => !table[y][x] || table[y][x].text !== '包' && (table[y][x].team !== this.team && 'stop'));
+
+            const paths = [
+                calcPoPath(range(this.y - 1, 0).map(y => [this.x, y])),
+                calcPoPath(range(this.y + 1, 9).map(y => [this.x, y])),
+                calcPoPath(range(this.x - 1, 0).map(x => [x, this.y])),
+                calcPoPath(range(this.x + 1, 8).map(x => [x, this.y])),
+                this.posIs([3, 7]) ? calcPoPath([[4, 8], [5, 9]]) : [],
+                this.posIs([3, 9]) ? calcPoPath([[4, 8], [5, 7]]) : [],
+                this.posIs([5, 7]) ? calcPoPath([[4, 8], [3, 9]]) : [],
+                this.posIs([5, 9]) ? calcPoPath([[4, 8], [3, 7]]) : [],
+                this.posIs([3, 0]) ? calcPoPath([[4, 1], [5, 2]]) : [],
+                this.posIs([3, 2]) ? calcPoPath([[4, 1], [5, 0]]) : [],
+                this.posIs([5, 0]) ? calcPoPath([[4, 1], [3, 2]]) : [],
+                this.posIs([5, 2]) ? calcPoPath([[4, 1], [3, 0]]) : [],
+            ].flat()
+
+            return paths
+        }
+
+        else if (this.text === '馬') {
+            const paths = [[0, -1], [-1, 0], [0, 1], [1, 0]]
+                .flatMap(p => [[p, p.map(i => i || -1)], [p, p.map(i => i || 1)]])
+                .map(([[x1, y1], [x2, y2]]) =>  [[x1, y1], [x1 + x2, y1 + y2]])
+                .map(ps => ps.map(toAbsoultePos))
+                .filter(ps => ps.every(isInBoard))
+                .filter(([[x1, y1], [x2, y2]]) => isEmptyPlace([x1, y1]) && isEmptyOrEnemy([x2, y2]))
+                .map(i => i[1])
+
+            return paths
+        }
+
+        else if (this.text === '象') {
+             const paths = [[0, -1], [-1, 0], [0, 1], [1, 0]]
+                .flatMap(p => [[p, p.map(i => i || -1), p.map(i => i || -1)], [p, p.map(i => i || 1), p.map(i => i || 1)]])
+                .map(([[x1, y1], [x2, y2], [x3, y3]]) => [[x1, y1], [x1 + x2, y1 + y2], [x1 + x2 + x3, y1 + y2 + y3]])
+                .map(ps => ps.map(toAbsoultePos))
+                .filter(ps => ps.every(isInBoard))
+                .filter(([[x1, y1], [x2, y2], [x3, y3]]) =>
+                    isEmptyPlace([x1, y1]) && isEmptyPlace([x2, y2]) && isEmptyOrEnemy([x3, y3])
+                )
+                .map(i => i[2])
+
+            return paths
+        }
+
+        return []
+    }
+
+    showPath() {
+        const paths = this.calcPath();
+        const onPathClick = pos => this.moveTo(pos);
+        this.path = new Path(paths, onPathClick);
+    }
+
+    onClick() {
+        if (!isInBoard(this.pos)) return;
+
+        gameStatus.selectedUnit && gameStatus.selectedUnit.cancelMove();
+        gameStatus.selectedUnit = this;
+        this.showPath()
+    }
+
+
+    cancelMove() {
+        this.path && this.path.destory();
+        this.path = null;
+        gameStatus.selectedUnit = null;
+    }
+
+    move([x, y]) {
+        this.moveTo([this.x + x, this.y + y])
+    }
+
+
+    moveTo([x, y]) {
+        // 기존 자리는 비우기
+        table[this.y][this.x] = null;
+
+        this.x = x;
+        this.y = y;
+
+        this.node.style.top = this.top
+        this.node.style.left = this.left
+
+        // 새 자리에 말이 있으면 지우기
+        if (table[y][x]) table[y][x].caught()
+
+        // 새 자리 차지
+        table[y][x] = this;
+    }
+
+    caught() {
+        table[this.y][this.x] = null;
+        const prison = this.team === 'green' ? redCatch : greenCatch;
+        
+        this.x = (prison.map(u => u.size).reduce((acc, v) => acc + v + 10, 0) ) / cellWidth;
+        this.y = this.team === 'green' ? -1.2 : 10.2;
+
+        prison.push(this);
+
+        setTimeout(() => {
+            this.node.style.top = this.top
+            this.node.style.left = this.left     
+        }, 300)
+
+    }
+
+}
+
+class Path {
+    constructor(paths, onClick) {
+        this.size = sizer('path')
+
+        this.nodes = []
+
+        for (const [x, y] of paths) {
+            const pathNode = document.createElement('div')
+            pathNode.style= `
+                width: ${this.size}px;
+                height: ${this.size}px;
+                left: ${x * cellWidth + (cellWidth - this.size) / 2}px;
+                top: ${y * cellHeight + (cellHeight - this.size) / 2}px;
+                font-size: ${this.size / 30}rem;
+                color: ${this.team};
+            `
+            pathNode.classList.add('path');
+
+            pathNode.addEventListener('click', () => {
+                onClick([x, y])
+                checkGameState()
+                this.destory()
+            })
+
+            this.nodes.push(pathNode)
+        }
+
+        board.append(...this.nodes);
+    }
+
+    destory() {
+        this.nodes.forEach(n => n.remove());
+        this.nodes = [];
+    }
+}
+
+
+class DevTool {
+    constructor() {
+        this.size = 30
+
+        range(10).map(y => range(9).map(x => {
+            const node = document.createElement('div')
+            node.style= `
+                position: absolute;
+                width: ${this.size}px;
+                height: ${this.size}px;
+                left: ${x * cellWidth + (cellWidth - this.size) / 2}px;
+                top: ${y * cellHeight + (cellHeight - this.size) / 2}px;
+                z-index: 10;
+                background: rgba(0, 0, 0, 0.25);
+                color: grey;
+            `
+            node.innerText = `${x}, ${y}`
+
+            board.appendChild(node)
+        }))
+    }
+}
+
+
+// new DevTool()
+
+const redKing = new Unit('漢', 4, 1);
+const greenKing = new Unit('楚', 4, 8);
+
+const units = [
+    redKing,
+    new Unit('士', 3, 0),
+    new Unit('士', 5, 0),
+    new Unit('兵', 0, 3),
+    new Unit('兵', 2, 3),
+    new Unit('兵', 4, 3),
+    new Unit('兵', 6, 3),
+    new Unit('兵', 8, 3),
+    new Unit('車', 0, 0),
+    new Unit('車', 8, 0),
+    new Unit('馬', 1, 0),
+    new Unit('馬', 7, 0),
+    new Unit('象', 2, 0),
+    new Unit('象', 6, 0),
+    new Unit('包', 7, 2),
+    new Unit('包', 1, 2),
+
+    greenKing,
+    new Unit('士', 3, 9),
+    new Unit('士', 5, 9),
+    new Unit('卒', 0, 6),
+    new Unit('卒', 2, 6),
+    new Unit('卒', 4, 6),
+    new Unit('卒', 6, 6),
+    new Unit('卒', 8, 6),
+    new Unit('車', 0, 9),
+    new Unit('車', 8, 9),
+    new Unit('馬', 1, 9),
+    new Unit('馬', 7, 9),
+    new Unit('象', 2, 9),
+    new Unit('象', 6, 9),
+    new Unit('包', 7, 7),
+    new Unit('包', 1, 7),
+]
+
+class UI {
+    constructor() {
+        this.info = document.createElement('div');
+        this.info.classList.add('center', 'hide', 'info');
+        board.appendChild(this.info);
+        this.timer = null;
+    }
+
+    win(team) {
+        this.beforeShow();
+        this.info.classList.add(team);
+        this.info.innerText = `${team === 'red' ? '한' : '초'}나라 승리`;
+    }
+
+    redWin() {
+        this.win('red')
+    }
+
+    greenWin() {
+        this.win('green');
+    }
+
+    async canCatchGreenKing() {
+        this.beforeShow();
+        this.info.classList.add('win', 'red');
+        this.info.innerText = '장군';
+        this.resetAfter(3000);
+    }
+
+    async canCatchRedKing() {
+        this.beforeShow();
+        this.info.classList.add('win', 'green');
+        this.info.innerText = '장군';
+        this.resetAfter(3000);
+    }
+
+    beforeShow() {
+        clearTimeout(this.timer);
+        this.info.classList.remove('hide');
+    }
+
+    reset() {
+        this.info.classList.add('hide');
+        this.info.classList.remove('green', 'red');
+        this.info.innerHTML = '';
+    }
+
+    resetAfter(n) {
+        this.timer = setTimeout(() => this.reset(), n);
+    }
+}
+
+class Setting {
+    constructor() {
+        const switchSize = 100;
+        const switchPositions = [[1.5, -0.5], [6.5, -0.5], [1.5, 10], [6.5, 10]];
+        const unitBasePos = [[0, 1], [0, 6], [9, 1], [9, 6]];
+
+        this.masangSwitchs = switchPositions.map(([x, y], i) => {
+           const node = document.createElement('button');
+           node.classList.add('switch');
+           node.innerText = '전환'
+           node.style = `
+                width: ${switchSize}px;
+                left: ${x * cellWidth + (cellWidth - switchSize) / 2}px;
+                top: ${y * cellHeight + (cellHeight - switchSize) / 2}px;
+           `
+
+           node.addEventListener('click', (e) => {
+               const [y, x] = unitBasePos[i];
+               const left = table[y][x];
+               const right = table[y][x + 1];
+
+               left.move([0, y < 5 ? 1 : -1])
+               right.move([-1, 0])
+               left.move([1, y < 5 ? -1 : 1])
+           })
+
+           return node;
+        })
+
+        board.append(...this.masangSwitchs);
+    }
+
+    destoryMasangSwitch() {
+        if (!this.masangSwitchs) return;
+        this.masangSwitchs.forEach(i => i.remove());
+        this.masangSwitchs = null;
+    }
+}
+
+const ui = new UI();
+const settings = new Setting();
+
+function checkGameState() {
+    if (!gameStatus.started) {
+        gameStatus.started = true;
+        settings.destoryMasangSwitch();
+    }
+
+    if (!isInBoard(greenKing.pos)) {
+        return ui.redWin();
+    }
+
+    if (!isInBoard(redKing.pos)) {
+        return ui.greenWin();
+    }
+
+    const canCatchGreenKing = !!units
+        .filter(u => u.team === 'red' &&  isInBoard(u.pos))
+        .flatMap(u => u.calcPath())
+        .find(path => greenKing.posIs(path))
+
+    if (canCatchGreenKing) {
+        return ui.canCatchGreenKing();
+    }
+
+    const canCatchRedKing = !!units
+        .filter(u => u.team === 'green' &&  isInBoard(u.pos))
+        .flatMap(u => u.calcPath())
+        .find(path => redKing.posIs(path))
+
+    if (canCatchRedKing) {
+        return ui.canCatchRedKing();
+    }
+
+}
+
+const delay = n => new Promise(r => setTimeout(r, n));
+
+const show = async () => {
+    for (const unit of units) {
+        unit.node.click();
+        await delay(100);
+    }
+}
+
+const randomPlay = async () => {
+    while (!redCatch.find(u => u.text === '楚' || u.text === '漢')) {
+        const chooseRed = Math.floor(Math.random() * units.length / 2);
+        const chooseBlue = Math.floor(Math.random() * units.length / 2) + 16;
+
+        units[chooseRed].node.click();
+        const hasRedPath = units[chooseRed].path && units[chooseRed].path.nodes.length
+
+        units[chooseBlue].node.click();
+        const hasBluePath = units[chooseBlue].path && units[chooseBlue].path.nodes.length
+
+        if (!hasRedPath || !hasBluePath) {
+            continue
+        }
+
+        units[chooseRed].node.click();
+        units[chooseRed].path.nodes[Math.floor(Math.random() * units[chooseRed].path.nodes.length)].click();
+
+        await delay(300);
+
+        units[chooseBlue].node.click();
+        units[chooseBlue].path.nodes[Math.floor(Math.random() * units[chooseBlue].path.nodes.length)].click();
+
+        await delay(300);
+    }
+}
+
+// randomPlay()
+
+
+</script>
+</body>
+</html>
