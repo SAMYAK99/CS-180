@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width = device-width, initial-scale = 1" />
+    <title>Tetris</title>
+    <style>
+      body {
+        text-align: center;
+        background: #fff;
+      }
+
+      #my-canvas {
+        background: #fff;
+        margin-left: 20px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <button onclick="state.playing = !state.playing">시작 / 정지</button>
+    </div>
+    <canvas id="my-canvas"></canvas>
+
+    <script>
+      const delay = (n) => new Promise((r) => setTimeout(r, n));
+      const createGrid = (width, height) =>
+        [...Array(height)].map(() => Array(width).fill(0));
+
+      const canvas = document.getElementById("my-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = 936;
+      canvas.height = 956;
+
+      const gBArrayHeight = 20;
+      const gBArrayWidth = 12;
+      const fallingSpeed = 500;
+
+      const state = {
+        score: 0,
+        level: 1,
+        time: 0,
+        playing: true,
+        pos: { x: 4, y: 0 },
+        oldCoords: null,
+        newCoords: null,
+        over: false,
+        lock: false,
+        winOrLose: "진행 중",
+      };
+
+      const toBoardPos = ([x, y]) => [x + state.pos.x, y + state.pos.y];
+
+      const tetrominos = [
+        [
+          [0, 1, 0],
+          [1, 1, 1],
+          [0, 0, 0],
+        ], // T
+        [
+          [2, 0, 0],
+          [2, 2, 2],
+          [0, 0, 0],
+        ], // L
+        [
+          [0, 0, 3],
+          [3, 3, 3],
+          [0, 0, 0],
+        ], // J
+        [
+          [4, 4, 0],
+          [4, 4, 0],
+          [0, 0, 0],
+        ], // O
+        [
+          [0, 5, 5],
+          [5, 5, 0],
+          [0, 0, 0],
+        ], // S
+        [
+          [6, 6, 0],
+          [0, 6, 6],
+          [0, 0, 0],
+        ], // Z
+        [
+          [0, 0, 0, 0],
+          [7, 7, 7, 7],
+          [0, 0, 0, 0],
+        ], // I
+      ];
+
+      const tetrominoColors = [
+        "white",
+        "purple",
+        "cyan",
+        "blue",
+        "yellow",
+        "orange",
+        "green",
+        "red",
+      ];
+
+      let curTetromino;
+      let curTetrominoColor;
+
+      let nextTetromino;
+      let nextTetrominoColor;
+
+      let well = createGrid(gBArrayWidth, gBArrayHeight);
+
+      const setCoords = (tet, pos) =>
+        tet.flatMap((row, i) =>
+          row.map((tile, j) => ({ x: pos.x + j, y: pos.y + i, z: tile }))
+        );
+
+      const removeFromWell = (coords, w) =>
+        coords.forEach((c) => c.y >= 0 && c.z && (w[c.y][c.x] = 0));
+
+      const placeOnWell = (coords) =>
+        coords.forEach(
+          ({ x, y, z }) => 0 <= y && y < gBArrayHeight && z && (well[y][x] = z)
+        );
+
+      class LocalStorageManager {
+        constructor() {
+          this.bestScoreKey = "tetrisBestScore";
+          this.storage = window.localStorage;
+        }
+
+        getBestScore() {
+          return this.storage.getItem(this.bestScoreKey) || 0;
+        }
+
+        setBestScore(score) {
+          this.storage.setItem(this.bestScoreKey, score);
+        }
+
+        setScore(score) {
+          this.setBestScore(Math.max(score, this.getBestScore()));
+        }
+      }
+
+      const storage = new LocalStorageManager();
+
+      const renderWell = () => {
+        //     ctx.clearRect(9, 9, 278, 460)
+        ctx.fillStyle = "black";
+        ctx.fillRect(8, 8, 280, 462);
+        well.forEach((row, y) =>
+          row.forEach((tile, x) => drawTile(x, y, tetrominoColors[tile]))
+        );
+      };
+
+      function setupCanvas() {
+        ctx.scale(2, 2);
+
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(8, 8, 280, 462);
+
+        // Next Tetromino //
+        ctx.strokeRect(300, 8, 161, 70);
+
+        ctx.fillStyle = "black";
+        ctx.font = "21px Arial";
+
+        ctx.fillText("레벨", 300, 100);
+        ctx.strokeRect(300, 107, 161, 24);
+        ctx.fillText(state.level, 310, 127);
+
+        ctx.fillText("점수", 300, 157);
+        ctx.strokeRect(300, 165, 161, 24);
+
+        ctx.fillText("최고 점수", 300, 220);
+        ctx.strokeRect(300, 225, 161, 24);
+        updateScore(state.score);
+
+        ctx.fillText("승/패", 300, 271);
+        ctx.fillText(state.winOrLose, 310, 311);
+        ctx.strokeRect(300, 282, 161, 45);
+
+        ctx.fillText("조작법", 300, 350);
+        ctx.strokeRect(300, 358, 161, 112);
+        ctx.font = "19px Arial";
+        ctx.fillText("← : 왼쪽으로", 310, 380);
+        ctx.fillText("→ : 오른쪽으로", 310, 400);
+        ctx.fillText(" ↓  : 아래로", 310, 420);
+        ctx.fillText(" ↑  : 오른쪽 돌림", 310, 440);
+        ctx.fillText("Space: 바로 내림 ", 310, 460);
+
+        createTetromino();
+        drawTetromino();
+        renderWell();
+      }
+
+      function updateScore() {
+        ctx.font = "21px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillRect(301, 166, 159, 22);
+        ctx.fillStyle = "black";
+        ctx.fillText(state.score, 310, 185);
+
+        storage.setScore(state.score);
+        ctx.fillStyle = "white";
+        ctx.fillRect(301, 226, 159, 22);
+        ctx.fillStyle = "black";
+        ctx.fillText(storage.getBestScore(), 310, 245);
+
+        state.level = ~~(state.score / 100) + 1;
+        ctx.fillStyle = "white";
+        ctx.fillRect(301, 108, 159, 22);
+        ctx.fillStyle = "black";
+        ctx.fillText(state.level, 310, 127);
+      }
+
+      function drawTetromino() {
+        const coords = setCoords(curTetromino, state.pos);
+        coords.forEach(
+          ({ x, y, z }) => z && drawTile(x, y, tetrominoColors[z])
+        );
+      }
+
+      function deleteTetromino() {
+        const coords = setCoords(curTetromino, state.pos);
+        coords.forEach(({ x, y, z }) => z && drawTile(x, y, "white"));
+      }
+
+      function drawNextTetromino() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(301, 9, 158, 68);
+
+        const coords = setCoords(nextTetromino, { x: 14.5, y: 0.5 });
+        coords.forEach(
+          ({ x, y, z }) => z && drawTile(x, y, tetrominoColors[z])
+        );
+      }
+
+      function drawTile(x, y, color) {
+        const coorX = x * 23 + 11;
+        const coorY = y * 23 + 10;
+        ctx.fillStyle = color;
+        ctx.fillRect(coorX, coorY, 21, 21);
+      }
+
+      function createTetromino() {
+        const randomTetrimino = Math.floor(Math.random() * tetrominos.length);
+        const randomNextTetrimino = Math.floor(
+          Math.random() * tetrominos.length
+        );
+
+        if (!nextTetromino) {
+          nextTetromino = tetrominos[randomTetrimino];
+          nextTetrominoColor = tetrominoColors[randomTetrimino];
+        }
+
+        curTetromino = nextTetromino;
+        curTetrominoColor = nextTetrominoColor;
+
+        nextTetromino = tetrominos[randomNextTetrimino];
+        nextTetrominoColor = tetrominoColors[randomNextTetrimino];
+        drawNextTetromino();
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (state.lock) return setTimeout(() => (state.lock = false), 100);
+
+        e.code === "ArrowDown" && canMove("down") && move("down");
+        e.code === "ArrowLeft" &&
+          !state.over &&
+          canMove("left") &&
+          move("left");
+        e.code === "ArrowRight" &&
+          !state.over &&
+          canMove("right") &&
+          move("right");
+        e.code === "ArrowUp" && !state.over && canMove("rotate") && move();
+        e.code === "Space" &&
+          (async () => {
+            try {
+              while (canMove("down")) await delay(1), move("down");
+            } catch (e) {
+              console.error(e);
+            }
+            state.lock = false;
+          })().catch(() => {
+            state.lock = false;
+          });
+      });
+
+      const canMove = (dir) => {
+        const tempWell = JSON.parse(JSON.stringify(well));
+        const tempPos = { x: state.pos.x, y: state.pos.y };
+
+        state.oldCoords && removeFromWell(state.oldCoords, tempWell);
+
+        if (dir === "rotate") {
+          const flipTet = (t) => t[0].map((c, i) => t.map((t) => t[i]));
+          const rotateTet = (t) => flipTet([...t].reverse());
+          const tempTet = rotateTet(curTetromino);
+          const tempNC = setCoords(tempTet, tempPos);
+          const collided = tempNC.some(
+            (c) => c.z && c.y >= 0 && tempWell[c.y][c.x] !== 0
+          );
+          if (!collided) {
+            curTetromino = rotateTet(curTetromino);
+            return true;
+          }
+          return false;
+        }
+        if (dir === "down") {
+          tempPos.y += 1;
+          const tempNC = setCoords(curTetromino, tempPos);
+          const collided = tempNC.some(
+            (c) =>
+              c.z && c.y >= 0 && (!tempWell[c.y] || tempWell[c.y][c.x] !== 0)
+          );
+          if (
+            state.oldCoords &&
+            collided &&
+            !well[0].slice(4, 7).some((i) => i)
+          ) {
+            state.pos = { x: 4, y: -2 };
+            state.newCoords = null;
+            state.oldCoords = null;
+            clearFullRows();
+            createTetromino();
+          }
+          if (collided && well[0].some((i) => i)) {
+            gameOver();
+            renderWell();
+          }
+          return !collided;
+        }
+
+        if (dir === "left") {
+          tempPos.x -= 1;
+          const tempNC = setCoords(curTetromino, tempPos).filter(
+            (c) => c.y >= 0
+          );
+          return !tempNC.some(
+            (c) => c.z && (!tempWell[c.y] || tempWell[c.y][c.x] !== 0)
+          );
+        }
+
+        if (dir === "right") {
+          tempPos.x += 1;
+          const tempNC = setCoords(curTetromino, tempPos).filter(
+            (c) => c.y >= 0
+          );
+          return !tempNC.some(
+            (c) => c.z && (!tempWell[c.y] || tempWell[c.y][c.x] !== 0)
+          );
+        }
+
+        return true;
+      };
+
+      const move = (dir) => {
+        if (dir === "down") state.pos.y += 1;
+        if (dir === "left") state.pos.x -= 1;
+        if (dir === "right") state.pos.x += 1;
+
+        state.newCoords = setCoords(curTetromino, state.pos);
+        state.oldCoords && removeFromWell(state.oldCoords, well);
+        placeOnWell(state.newCoords);
+        state.oldCoords = state.newCoords;
+        renderWell();
+      };
+
+      const clearFullRows = () =>
+        (well = well.reduce(
+          (acc, row) =>
+            row.every((c) => !!c)
+              ? ((state.score += 10),
+                updateScore(),
+                [Array(gBArrayWidth).fill(0), ...acc])
+              : [...acc, row],
+          []
+        ));
+
+      const gameOver = () => {
+        state.winOrLose = "게임 오버";
+        state.over = true;
+        ctx.fillStyle = "white";
+        ctx.fillRect(310, 283, 140, 40);
+        ctx.fillStyle = "black";
+        ctx.fillText(state.winOrLose, 310, 311);
+      };
+
+      const freeFall = (t) => {
+        if (
+          state.playing &&
+          t - state.time > Math.max(fallingSpeed - state.level * 25, 150) &&
+          state.winOrLose !== "게임 오버"
+        ) {
+          state.time = t;
+          canMove("down") && move("down");
+        }
+
+        requestAnimationFrame(freeFall);
+      };
+
+      setupCanvas();
+
+      requestAnimationFrame(freeFall);
+    </script>
+  </body>
+</html>
